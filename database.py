@@ -37,15 +37,15 @@ class Classroom(db.Model):
 
 
 
-class LoudnessDatum(db.Model):
+class LoudnessData(db.Model):
     __tablename__ = 'LoudnessData'
 
     ID = db.Column(db.Integer, primary_key=True)
     ClassroomID = db.Column(db.ForeignKey('Classrooms.ClassroomID'))
     LoudnessReading = db.Column(db.Float)
-    DataRecorded = db.Column(db.Date)
+    DateRecorded = db.Column(db.Date)
 
-    Classroom = db.relationship('Classroom', primaryjoin='LoudnessDatum.ClassroomID == Classroom.ClassroomID', backref='loudness_data')
+    Classroom = db.relationship('Classroom', primaryjoin='LoudnessData.ClassroomID == Classroom.ClassroomID', backref='loudness_data')
 
 
 
