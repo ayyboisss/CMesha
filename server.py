@@ -1,11 +1,9 @@
-from database import app, AnemometerDatum, Classroom, LoudnessDatum, TemperatureHumidityDatum, Teacher, t_TeacherClassrooms, db
+from database import app, Classroom, LoudnessData
 from flask import render_template
 
 @app.route("/")
 def home():
-    wind_speed = db.session.execute(db.select(AnemometerDatum))
-    print(wind_speed)
-
+    print(LoudnessData.query.with_entities(LoudnessData.LoudnessReading, LoudnessData.ClassroomID).all())
     return(render_template("main.html"))
 
 if "__main__" == __name__:
