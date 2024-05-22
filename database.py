@@ -22,7 +22,6 @@ class AnemometerDatum(db.Model):
     ID = db.Column(db.Integer, primary_key=True)
     ClassroomID = db.Column(db.ForeignKey('Classrooms.ClassroomID'))
     AnemometerReading = db.Column(db.Float)
-    DateRecorded = db.Column(db.Date)
 
     Classroom = db.relationship('Classroom', primaryjoin='AnemometerDatum.ClassroomID == Classroom.ClassroomID', backref='anemometer_data')
 
@@ -43,7 +42,6 @@ class LoudnessData(db.Model):
     ID = db.Column(db.Integer, primary_key=True)
     ClassroomID = db.Column(db.ForeignKey('Classrooms.ClassroomID'))
     LoudnessReading = db.Column(db.Float)
-    DateRecorded = db.Column(db.Date)
 
     Classroom = db.relationship('Classroom', primaryjoin='LoudnessData.ClassroomID == Classroom.ClassroomID', backref='loudness_data')
 
@@ -73,6 +71,5 @@ class TemperatureHumidityDatum(db.Model):
     ClassroomID = db.Column(db.ForeignKey('Classrooms.ClassroomID'))
     TemperatureReading = db.Column(db.Float)
     HumidityReading = db.Column(db.Float)
-    DateRecorded = db.Column(db.Date)
 
     Classroom = db.relationship('Classroom', primaryjoin='TemperatureHumidityDatum.ClassroomID == Classroom.ClassroomID', backref='temperature_humidity_data')
