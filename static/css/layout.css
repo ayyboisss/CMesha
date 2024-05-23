@@ -1,9 +1,10 @@
 body{
     display: grid;
     grid-template-columns: 1fr, repeat(3, 4fr);
-    grid-template-rows: repeat(3, 1fr);
+    grid-template-rows: repeat(4, 1fr);
     grid-template-areas:
         "hd nav nav nav"
+        "main main main sb"
         "main main main sb"
         "ft ft ft ft"
     ;
