@@ -20,5 +20,7 @@ def analytics(classroom_id):
 @app.route("/about")
 def about():
     return(render_template("pages/about.html"))
+
+
 if "__main__" == __name__:
     app.run(debug=True) 

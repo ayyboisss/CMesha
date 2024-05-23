@@ -73,6 +73,6 @@ class TemperatureHumidityDatum(db.Model):
     ClassroomID = db.Column(db.ForeignKey('Classrooms.ClassroomID'))
     TemperatureReading = db.Column(db.Float)
     HumidityReading = db.Column(db.Float)
-    DateRecorded = db.column(db.DateTime)
+    DateRecorded = db.Column(db.DateTime)
 
     Classroom = db.relationship('Classroom', primaryjoin='TemperatureHumidityDatum.ClassroomID == Classroom.ClassroomID', backref='temperature_humidity_data')
