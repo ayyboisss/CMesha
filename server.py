@@ -8,8 +8,6 @@ def home():
         print(i.ClassroomID, i.LoudnessReading)
     return(render_template("main.html"))
 
-<<<<<<< HEAD
-=======
 
 @app.route("/classroom/<string:classroom_id>")
 def analytics(classroom_id):
@@ -24,6 +22,5 @@ def about():
     return(render_template("pages/about.html"))
 
 
->>>>>>> 28e0814e763499924d3b3b7797b7cdfd64ea6351
 if "__main__" == __name__:
     app.run(debug=True) 
