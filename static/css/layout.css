@@ -1,3 +1,8 @@
+@font-face {
+    font-family: "font-awesome";
+    src: url("/static/fonts/fa-regular-400.ttf");
+}
+
 body{
     margin: 0;
     display: grid;
@@ -11,29 +16,44 @@ body{
         "main main main sb" 
         "ft ft ft sb"
     ;
+    color: white;
 }
 
 header{
     grid-area: hd;
-    background-color: rgb(234, 190, 255);
+    background-color: #636363;
+}
+
+header > h1{
+    color: #F3D8FF;
+
+}
+
+header > h1 .cap-c{
+    color: #C9E4CA;
+}
+
+header > h1 > .glyph{
+    font-family: "font-awesome";
+    color:white;
 }
 
 nav{
     grid-area: nav;
-    background-color: rgb(133, 133, 133);
+    background-color: #636363;
 }
 
 main{
     grid-area: main;
-    background-color: rgb(94, 92, 92);
+    background-color: #636363;
 }
 
 .sidebar{
     grid-area: sb;
-    background-color: rgb(160, 255, 223);
+    background-color: rgb(100, 100, 100);
 }
 
 footer{
     grid-area: ft;
-    background-color: gray;
+    background-color: rgb(0, 0, 0);
 }
