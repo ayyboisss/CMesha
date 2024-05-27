@@ -1,59 +1,107 @@
+/* GLOBAL VARIBALES */
+:root{
+    --text-color: white;
+    --main-color: #636363;
+    --main-color-darker: #303030;
+    --border-color: white;
+
+}
+
 @font-face {
+    /* This doesn't work right now */
     font-family: "font-awesome";
     src: url("/static/fonts/fa-regular-400.ttf");
 }
+
+
+
 
 body{
     margin: 0;
     display: grid;
     width: 100vw;
     height: 100vh;
+
+    /* 
+       The numbers here can get finicky,
+       best use standard numbers.
+    */
     grid-template-columns: 1.5fr 4fr 4fr 2fr;
-    grid-template-rows: 0.8fr 3fr 3fr 1fr;
+    grid-template-rows: 0.5fr 3fr 3fr 0.2fr;
     grid-template-areas:
         "hd nav nav nav" 
         "main main main sb" 
         "main main main sb" 
         "ft ft ft sb"
     ;
-    color: white;
+    color: var(--text-color);
+    background-color: var(--main-color);
 }
 
 header{
     grid-area: hd;
-    background-color: #636363;
 }
 
+/* HEADER TAG */
+/* Adding some finesse for the header title */ 
 header > h1{
     color: #F3D8FF;
-
+    margin: 0px;
+    padding: 0.5em 1em 0.5em 0.5rem;
+    font-size: 2em;
+    text-wrap: nowrap;
 }
 
 header > h1 .cap-c{
     color: #C9E4CA;
 }
 
-header > h1 > .glyph{
+header > h1 .dash{
+    color: var(--text-color)
+}
+
+header > h1 .glyph{
     font-family: "font-awesome";
     color:white;
 }
 
+/* NAV TAG */
 nav{
     grid-area: nav;
-    background-color: #636363;
 }
 
+nav > h1{
+    margin: 0px;
+    font-size: 2em;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+}
+
+/* flex container */
+nav > ul{
+    display: flex;
+    flex-wrap: nowrap;
+
+}
+
+/* flex children lmfao */
+nav > ul > li{
+    text-align: center;
+    list-style-type: none;
+    font-size: 1.5rem;
+}
+
+/* MAIN TAG */
 main{
     grid-area: main;
-    background-color: #636363;
+    background-color: var(--main-color-darker);
 }
 
 .sidebar{
     grid-area: sb;
-    background-color: rgb(100, 100, 100);
 }
 
+/* FOOTER TAG */
 footer{
     grid-area: ft;
-    background-color: rgb(0, 0, 0);
 }
