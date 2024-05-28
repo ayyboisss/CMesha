@@ -1,12 +1,12 @@
 from database import app, Classroom, LoudnessData
 from flask import render_template
 
+
 @app.route("/")
 def home():
-    the_page = LoudnessData.query.paginate(per_page=6)
-    for i in the_page.items:
-        print(i.ClassroomID, i.LoudnessReading)
-    return(render_template("main.html"))
+    classrooms = Classroom.query.with_entities(
+                    Classroom.ClassroomID).all()
+    return(render_template("pages/main.html", classrooms = classrooms))
 
 
 @app.route("/classroom/<string:classroom_id>")
@@ -16,6 +16,10 @@ def analytics(classroom_id):
         ClassroomID = classroom_id).with_entities(
         LoudnessData.ClassroomID, LoudnessData.LoudnessReading).all()
     return(render_template("pages/analytics.html", classroom = classroom_id, loudness = loudness))
+
+@app.route("/staff")
+def staff():
+    return(render_template("pages/staff.html"))
 
 @app.route("/about")
 def about():
