@@ -1,9 +1,19 @@
 {% extends 'layout.html' %}\
 {% block content %}
 <h1> {{classroom}} </h1>
-<h2> {% for i in loudness %} </h2>
-<h2>
-    {{i}}
-</h2>
+
+<h2> Loudness </h2>
+{% for i in loudness %}
+<h3>
+    {{i[0]}}
+</h3>
 {% endfor %}
+
+<h2> Temperature </h2>
+{% for i in temperature %}
+<h3>
+    {{i[0]}}
+</h3>
+{% endfor %}
+
 {% endblock %}

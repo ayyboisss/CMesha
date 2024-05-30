@@ -14,7 +14,7 @@ def analytics(classroom_id):
     # Queries
     loudness = LoudnessData.query.filter_by(
         ClassroomID=classroom_id).with_entities(
-        LoudnessData.ClassroomID, LoudnessData.LoudnessReading).all()
+        LoudnessData.LoudnessReading).all()
     
     temperature = TemperatureHumidityDatum.query.filter_by(
         ClassroomID=classroom_id).with_entities(
@@ -24,10 +24,15 @@ def analytics(classroom_id):
         ClassroomID=classroom_id).with_entities(
         TemperatureHumidityDatum.HumidityReading).all()
     
-    wind_speed
+    wind_speed = AnemometerDatum.query.filter_by(
+        ClassroomID=classroom_id).with_entities(
+        AnemometerDatum.AnemometerReading).all()
     
 
-    return (render_template("pages/analytics.html", classroom=classroom_id, loudness=loudness))
+    return (render_template("pages/analytics.html",
+                             classroom=classroom_id, loudness=loudness,
+                             temperature=temperature, humidity=humidity,
+                             wind_speed=wind_speed))
 
 @app.route("/staff")
 def staff():
