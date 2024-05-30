@@ -26,8 +26,8 @@ body{
        The numbers here can get finicky,
        best use standard numbers.
     */
-    grid-template-columns: 1.5fr 4fr 4fr 2fr;
-    grid-template-rows: 0.5fr 3fr 3fr 0.2fr;
+    grid-template-columns: 10% 2fr 2fr 0.5fr;
+    grid-template-rows: 5% 45% 45% 5%;
     grid-template-areas:
         "hd nav nav nav" 
         "main main main sb" 
@@ -47,9 +47,12 @@ header{
 header > h1{
     color: #F3D8FF;
     margin: 0px;
-    padding: 0.5em 1em 0.5em 0.5rem;
-    font-size: 2em;
+    font-size: 200%;
+    block-size: 100%;
     text-wrap: nowrap;
+    line-height: 150%;
+    margin-left: 5%;
+    padding-right: 10%;
 }
 
 header > h1 .cap-c{
@@ -70,25 +73,30 @@ nav{
     grid-area: nav;
 }
 
-nav > h1{
-    margin: 0px;
-    font-size: 2em;
-    margin-top: 0.5em;
-    margin-bottom: 0.5em;
-}
-
 /* flex container */
 nav > ul{
     display: flex;
     flex-wrap: nowrap;
-
+    margin: 0px;
+    padding: 0px;
+    width: 100%;
+    height: 100%;
 }
 
 /* flex children lmfao */
-nav > ul > li{
+nav > ul > a{
     text-align: center;
     list-style-type: none;
     font-size: 1.5rem;
+    text-align: center;
+    line-height: 220%;
+    padding-left: 2.5%;
+    padding-right: 2.5%;
+}
+
+nav > ul > a:hover{
+    color: black;
+    background-color: #F3D8FF;
 }
 
 /* MAIN TAG */
@@ -110,4 +118,9 @@ a{
 /* FOOTER TAG */
 footer{
     grid-area: ft;
+    margin: 0%;
+}
+
+footer > *{
+    margin: inherit;
 }
