@@ -26,8 +26,8 @@ body{
        The numbers here can get finicky,
        best use standard numbers.
     */
-    grid-template-columns: 10% 2fr 2fr 0.5fr;
-    grid-template-rows: 5% 45% 45% 5%;
+    grid-template-columns: 0.5fr 2fr 2fr 0.5fr;
+    grid-template-rows: 0.2fr 2fr 2fr 0.2fr;
     grid-template-areas:
         "hd nav nav nav" 
         "main main main sb" 
