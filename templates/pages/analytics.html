@@ -16,4 +16,18 @@
 </h3>
 {% endfor %}
 
+<h2> Humidity </h2>
+{% for i in humidity %}
+<h3>
+    {{i[0]}}
+</h3>
+{% endfor %}
+
+<h2> Wind Speed </h2>
+{% for i in wind_speed %}
+<h3> 
+    {{i[0]}}
+</h3>
+{% endfor %}
+
 {% endblock %}
