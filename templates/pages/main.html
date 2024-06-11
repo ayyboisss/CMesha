@@ -1,10 +1,8 @@
 {% extends 'layout.html' %}
 {% block content %}
-<h1> Classrooms </h1>
-<span> Not representative of the final product </span> 
-<ul>
+<ul class="classroom-grid-container">
     {% for i in classrooms %}
-    <li><a href="classroom/{{i[0]}}">{{i[0]}}</a></li>
+    <li class="classroom-grid-item"><a href="classroom/{{i[0]}}">{{i[0]}}</a></li>
     {% endfor %}
 </ul>
 {% endblock %}

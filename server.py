@@ -5,7 +5,7 @@ from flask import render_template
 @app.route("/")
 def home():
     classrooms = Classroom.query.with_entities(
-                    Classroom.ClassroomID).all()
+                    Classroom.ClassroomID).limit(6).all()
     return (render_template("pages/main.html", classrooms=classrooms))
 
 
