@@ -10,6 +10,8 @@
 /* hooray responsive designs */
 html {
   box-sizing: border-box;
+  min-width: 100vw;
+  min-height: 100vh;
 }
 
 *, *:before, *:after {
@@ -41,6 +43,7 @@ body {
 header {
   grid-area: hd;
   box-sizing: border-box;
+  padding-right: 2rem;
 }
 
 /* HEADER TAG */
@@ -67,8 +70,9 @@ header > h1 .dash {
 /* NAV TAG */
 nav {
   grid-area: nav;
-  padding-left: 1rem;
   max-height: 2rem;
+  min-height: 100%;
+  height: 100%;
   /* flex box container */
 }
 nav ul {
@@ -77,25 +81,25 @@ nav ul {
   margin: 0px;
   padding: 0px;
   height: 100%;
+  width: 100%;
   /* flex children lmfao */
 }
 nav ul li {
-  display: inline-block;
   list-style-type: none;
-  height: 100%;
   /* and finally, the links*/
 }
 nav ul li a {
-  box-sizing: border-box;
-  height: 100%;
+  /* These 2 things allow the anchor to be bigger */
   display: inline-block;
+  height: 100%;
+  /* spacing between links */
   padding-left: 2rem;
   padding-right: 2rem;
   font-size: 1.5rem;
   text-align: center;
+  line-height: 3rem;
 }
-
-nav > ul > a:hover {
+nav ul li a:hover {
   color: black;
   background-color: #F3D8FF;
   box-sizing: border-box;
@@ -106,12 +110,13 @@ main {
   grid-area: main;
   overflow: hidden;
   background-color: var(--main-color-darker);
+  padding-left: 1.5rem;
 }
 
-main > .classroom-grid-container {
+.classroom-grid-container {
   /* IMPORTANT FOR SETTING ITEMS INSIDE THE CONTAINER */
+  overflow: hidden;
   position: relative;
-  margin: auto;
   /* Grid stuff */
   display: grid;
   grid-template-areas: "g-c g-c g-c" "g-c g-c g-c";
@@ -120,44 +125,53 @@ main > .classroom-grid-container {
   /* ul stuff */
   width: 100%;
   height: 100%;
+  min-height: 30%;
   margin: 0;
   padding: 0;
   box-sizing: content-box;
 }
 
-/* li in ul in main */
 /* The classroom id/title in the 6 grid layout*/
-main > .classroom-grid-container > .classroom-grid-items > .classroom-grid-title {
+.classroom-grid-title {
   /* Text related properties */
   text-align: center;
   color: #C9E4CA;
   box-sizing: border-box;
   /* Title box properties */
-  height: 10%;
+  border: #9c80a8 solid;
+  height: 2em;
   width: 50%;
   background-color: var(--main-color);
-  /* Positioning it */
+  /* Positioning */
   position: absolute;
   left: 50%;
   transform: translate(-50%, 0);
-  top: -5%;
+  top: -1em;
+  /* text inside the title box*/
 }
-
-/* This is the text inside the title box */
-.classroom-grid-title > div {
+.classroom-grid-title:hover {
+  border: #F3D8FF solid;
+}
+.classroom-grid-title div {
+  position: relative;
   box-sizing: content-box;
   height: 100%;
   text-align: center;
   vertical-align: middle;
+  line-height: 150%;
+  font-size: 1.2rem;
+  overflow: hidden;
 }
 
-main > .classroom-grid-container > .classroom-grid-items {
+/* This is where most the content will be in */
+.classroom-grid-items {
   position: relative;
-  margin: 2rem;
+  margin: 1em;
   box-sizing: content-box;
   /* Boxesthings*/
-  background-color: white;
-  border-radius: 50px;
+  background-color: var(--main-color);
+  border-radius: 20px;
+  border: white solid;
 }
 
 .sidebar {
