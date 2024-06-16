@@ -1,6 +1,6 @@
 /* GLOBAL VARIBALES */
 :root {
-  --text-color: white;
+  --text-color: #C9E4CA;
   --main-color: #636363;
   --main-color-darker: #303030;
   --border-color: white;
@@ -44,6 +44,7 @@ header {
   grid-area: hd;
   box-sizing: border-box;
   padding-right: 2rem;
+  border-bottom: 2px #adadad solid;
 }
 
 /* HEADER TAG */
@@ -57,6 +58,8 @@ header > h1 {
   block-size: 100%;
   text-wrap: nowrap;
   line-height: 150%;
+  /* To fix wrapping issues related in firefox */
+  white-space: nowrap;
 }
 
 header > h1 .cap-c {
@@ -73,6 +76,7 @@ nav {
   max-height: 2rem;
   min-height: 100%;
   height: 100%;
+  border-bottom: 2px #adadad solid;
   /* flex box container */
 }
 nav ul {
@@ -89,6 +93,7 @@ nav ul li {
   /* and finally, the links*/
 }
 nav ul li a {
+  color: var(--text-color);
   /* These 2 things allow the anchor to be bigger */
   display: inline-block;
   height: 100%;
@@ -100,8 +105,8 @@ nav ul li a {
   line-height: 3rem;
 }
 nav ul li a:hover {
-  color: black;
-  background-color: #F3D8FF;
+  color: rgb(241, 255, 243);
+  background-color: rgba(243, 216, 255, 0.3411764706);
   box-sizing: border-box;
 }
 
@@ -111,6 +116,7 @@ main {
   overflow: hidden;
   background-color: var(--main-color-darker);
   padding-left: 1.5rem;
+  padding-top: 0.5rem;
 }
 
 .classroom-grid-container {
@@ -158,8 +164,6 @@ main {
   height: 100%;
   text-align: center;
   vertical-align: middle;
-  line-height: 150%;
-  font-size: 1.2rem;
   overflow: hidden;
 }
 
@@ -171,7 +175,7 @@ main {
   /* Boxesthings*/
   background-color: var(--main-color);
   border-radius: 20px;
-  border: white solid;
+  border: rgb(170, 170, 170) solid;
 }
 
 .sidebar {
