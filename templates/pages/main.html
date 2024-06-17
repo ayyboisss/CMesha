@@ -1,9 +1,8 @@
 {% extends 'layout.html' %}
 {% block content %}
 <div class="classroom-grid-container">
-    {% for i in classrooms %}
+    {% for i in giga_list %}
     <div class="classroom-grid-items">
-        <!-- Title > Measurements Date > Sound | That's the list of how it should be set up  -->
         <a href="classroom/{{i[0]}}"  class="classroom-grid-title"><div>{{i[0]}}</div></a>
     </div>
     {% endfor %}
