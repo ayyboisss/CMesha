@@ -3,7 +3,13 @@
 <div class="classroom-grid-container">
     {% for i in giga_list %}
     <div class="classroom-grid-items">
-        <a href="classroom/{{i}}"  class="classroom-grid-title"><div>{{i}}</div></a>
+        <a href="classroom/{{i[0]}}"  class="classroom-grid-title"><div>{{i[0]}}</div></a>
+        <ul>
+            <li> <i class="fa-solid fa-temperature-three-quarters"></i>{{i[1]}} </li>
+            <li> {{i[2]}} </li>
+            <li> {{i[3]}} </li>
+            <li> {{i[4]}} </li>
+        </ul>
     </div>
     {% endfor %}
 </div>

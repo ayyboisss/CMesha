@@ -1,3 +1,5 @@
+/* imports */
+@import url(//fonts.googleapis.com/css?family=Nunito);
 /* GLOBAL VARIBALES */
 :root {
   --text-color: #C9E4CA;
@@ -12,6 +14,7 @@ html {
   box-sizing: border-box;
   min-width: 100vw;
   min-height: 100vh;
+  font-family: "Nunito";
 }
 
 *, *:before, *:after {
@@ -176,6 +179,26 @@ main {
   background-color: var(--main-color);
   border-radius: 20px;
   border: rgb(170, 170, 170) solid;
+  /* Third grid */
+}
+.classroom-grid-items ul {
+  box-sizing: border-box;
+  height: 100%;
+  width: 100%;
+  margin: 0px;
+  padding: 0px;
+  padding-top: 20px;
+  display: grid;
+  grid-template-areas: "temp outTemp sound" "humidity windSpd sound" "date date sound";
+  grid-template-columns: 1fr 1fr 0.2fr;
+  grid-template-rows: 1fr 1fr 0.2fr;
+  list-style: none;
+}
+.classroom-grid-items ul temp {
+  grid-area: temp;
+}
+.classroom-grid-items ul humidity {
+  grid-area: humidity;
 }
 
 .sidebar {

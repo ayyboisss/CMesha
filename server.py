@@ -35,31 +35,43 @@ def home():
                     Classroom.ClassroomID).limit(6).all()
 
     giga_list = []
+
     for i in classrooms:
+        temp_list = []
         print(i[0])
         # Classroom ID, this is technically creating a table in python
-        giga_list.append(i)
+        temp_list.append(i[0])
 
         # Yep, we're doing this again
         loudness = LoudnessData.query.filter_by(
             ClassroomID=i[0]).with_entities(
             LoudnessData.LoudnessReading).first()
-        giga_list.append(loudness)
+        if not loudness:
+            loudness = (0,)
+        temp_list.append(loudness[0])
 
         temperature = TemperatureHumidityDatum.query.filter_by(
             ClassroomID=i[0]).with_entities(
             TemperatureHumidityDatum.TemperatureReading).first()
-        giga_list.append(temperature)
+        if not temperature:
+            temperature = (0,)
+        temp_list.append(temperature[0])
 
         humidity = TemperatureHumidityDatum.query.filter_by(
             ClassroomID=i[0]).with_entities(
             TemperatureHumidityDatum.HumidityReading).first()
-        giga_list.append(humidity)
+        if not humidity:
+            humidity = (0,)
+        temp_list.append(humidity[0])
 
         wind_speed = AnemometerDatum.query.filter_by(
             ClassroomID=i[0]).with_entities(
             AnemometerDatum.AnemometerReading).first()
-        giga_list.append(wind_speed)
+        if not wind_speed:
+            wind_speed = (0,)
+        temp_list.append(wind_speed[0])
+
+        giga_list.append(temp_list[0])
 
     print(giga_list)
     return (render_template("pages/main.html", giga_list=giga_list))
