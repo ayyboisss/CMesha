@@ -220,12 +220,28 @@ main{
 
         list-style: none;
         
-        temp{
+        .temp{
             grid-area: temp;
         }
     
-        humidity{
+        .humidity{
             grid-area: humidity;
+        }
+
+        .windSpeed{
+            grid-area: windSpd;
+        }
+
+        .sound{
+            grid-area: sound;
+        }
+
+        .outTemp{
+            grid-area: outTemp;
+        }
+
+        .date{
+            grid-area: date;
         }
     }
 }
