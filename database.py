@@ -46,7 +46,7 @@ class LoudnessData(db.Model):
     Classroom = db.relationship('Classroom', primaryjoin='LoudnessData.ClassroomID == Classroom.ClassroomID', backref='loudness_data')
 
 
-t_TeacherClassrooms = db.Table(
+t_TeachaerClassrooms = db.Table(
     'TeacherClassrooms',
     db.Column('TeacherID', db.ForeignKey('Teachers.ID')),
     db.Column('ClassroomID', db.ForeignKey('Classrooms.ClassroomID'))

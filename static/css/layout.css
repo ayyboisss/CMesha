@@ -186,19 +186,32 @@ main {
   height: 100%;
   width: 100%;
   margin: 0px;
-  padding: 0px;
-  padding-top: 20px;
+  padding: auto;
+  padding-top: 30px;
   display: grid;
   grid-template-areas: "temp outTemp sound" "humidity windSpd sound" "date date sound";
   grid-template-columns: 1fr 1fr 0.2fr;
   grid-template-rows: 1fr 1fr 0.2fr;
   list-style: none;
 }
-.classroom-grid-items ul temp {
+.classroom-grid-items ul .temp {
   grid-area: temp;
 }
-.classroom-grid-items ul humidity {
+.classroom-grid-items ul .humidity {
   grid-area: humidity;
+}
+.classroom-grid-items ul .windSpeed {
+  grid-area: windSpd;
+}
+.classroom-grid-items ul .sound {
+  grid-area: sound;
+  padding-left: 20px;
+}
+.classroom-grid-items ul .outTemp {
+  grid-area: outTemp;
+}
+.classroom-grid-items ul .date {
+  grid-area: date;
 }
 
 .sidebar {

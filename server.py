@@ -31,6 +31,8 @@ def kowalski_analyze(classroom_id=str):
 
 @app.route("/")
 def home():
+
+    # This entire thing creates a list of all the data each classroom has.
     classrooms = Classroom.query.with_entities(
                     Classroom.ClassroomID).limit(6).all()
 
@@ -47,31 +49,31 @@ def home():
             ClassroomID=i[0]).with_entities(
             LoudnessData.LoudnessReading).first()
         if not loudness:
-            loudness = (0,)
+            loudness = ('No Data',)
         temp_list.append(loudness[0])
 
         temperature = TemperatureHumidityDatum.query.filter_by(
             ClassroomID=i[0]).with_entities(
             TemperatureHumidityDatum.TemperatureReading).first()
         if not temperature:
-            temperature = (0,)
+            temperature = ('No Data',)
         temp_list.append(temperature[0])
 
         humidity = TemperatureHumidityDatum.query.filter_by(
             ClassroomID=i[0]).with_entities(
             TemperatureHumidityDatum.HumidityReading).first()
         if not humidity:
-            humidity = (0,)
+            humidity = ('No Data',)
         temp_list.append(humidity[0])
 
         wind_speed = AnemometerDatum.query.filter_by(
             ClassroomID=i[0]).with_entities(
             AnemometerDatum.AnemometerReading).first()
         if not wind_speed:
-            wind_speed = (0,)
+            wind_speed = ('No Data',)
         temp_list.append(wind_speed[0])
 
-        giga_list.append(temp_list[0])
+        giga_list.append(temp_list)
 
     print(giga_list)
     return (render_template("pages/main.html", giga_list=giga_list))

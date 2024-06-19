@@ -208,8 +208,8 @@ main{
         height: 100%;
         width: 100%;
         margin: 0px;
-        padding: 0px;
-        padding-top: 20px;
+        padding: auto;
+        padding-top: 30px;
         display: grid;
         grid-template-areas:
         "temp outTemp sound"
@@ -234,6 +234,7 @@ main{
 
         .sound{
             grid-area: sound;
+            padding-left: 20px;
         }
 
         .outTemp{
