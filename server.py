@@ -45,13 +45,6 @@ def home():
         temp_list.append(i[0])
 
         # Yep, we're doing this again
-        loudness = LoudnessData.query.filter_by(
-            ClassroomID=i[0]).with_entities(
-            LoudnessData.LoudnessReading).first()
-        if not loudness:
-            loudness = ('No Data',)
-        temp_list.append(loudness[0])
-
         temperature = TemperatureHumidityDatum.query.filter_by(
             ClassroomID=i[0]).with_entities(
             TemperatureHumidityDatum.TemperatureReading).first()
@@ -65,6 +58,13 @@ def home():
         if not humidity:
             humidity = ('No Data',)
         temp_list.append(humidity[0])
+
+        loudness = LoudnessData.query.filter_by(
+            ClassroomID=i[0]).with_entities(
+            LoudnessData.LoudnessReading).first()
+        if not loudness:
+            loudness = ('0',)
+        temp_list.append(loudness[0])
 
         wind_speed = AnemometerDatum.query.filter_by(
             ClassroomID=i[0]).with_entities(
