@@ -194,7 +194,8 @@ main {
   grid-template-columns: 1fr 1fr 0.2fr;
   grid-template-rows: 1fr 1fr 0.2fr;
   list-style: none;
-  font-size: 2rem;
+  text-align: center;
+  font-size: 1.5rem;
 }
 .classroom-grid-items ul .temp {
   grid-area: temp;
@@ -207,6 +208,7 @@ main {
 }
 .classroom-grid-items ul .sound {
   grid-area: sound;
+  min-width: 5em;
   padding-left: 20px;
   text-align: center;
 }
@@ -220,7 +222,11 @@ main {
   display: flex;
   flex-direction: column;
   flex-grow: 0;
-  gap: 13px;
+  height: 100%;
+  gap: 3%;
+}
+.classroom-grid-items ul .sound .sound-meter i:hover {
+  color: #F3D8FF;
 }
 .classroom-grid-items ul .out-temp {
   grid-area: outTemp;
