@@ -210,6 +210,7 @@ main{
         margin: 0px;
         padding: auto;
         padding-top: 30px;
+        /* Grid Stuff*/
         display: grid;
         grid-template-areas:
         "temp outTemp sound"
@@ -217,9 +218,8 @@ main{
         "date date sound";
         grid-template-columns: 1fr 1fr 0.2fr;
         grid-template-rows: 1fr 1fr 0.2fr;
-
         list-style: none;
-        
+        font-size: 2rem;
         .temp{
             grid-area: temp;
         }
