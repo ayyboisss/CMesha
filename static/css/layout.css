@@ -176,7 +176,7 @@ main {
   margin: 1em;
   box-sizing: content-box;
   /* Boxesthings*/
-  background-color: var(--main-color);
+  background-color: #555555;
   border-radius: 20px;
   border: rgb(170, 170, 170) solid;
   /* Third grid */
@@ -200,14 +200,27 @@ main {
 .classroom-grid-items ul .humidity {
   grid-area: humidity;
 }
-.classroom-grid-items ul .windSpeed {
+.classroom-grid-items ul .wind-speed {
   grid-area: windSpd;
 }
 .classroom-grid-items ul .sound {
   grid-area: sound;
   padding-left: 20px;
+  text-align: center;
 }
-.classroom-grid-items ul .outTemp {
+.classroom-grid-items ul .sound .sound-db {
+  margin-top: 5px;
+  margin-right: 10px;
+  color: var(--text-color);
+}
+.classroom-grid-items ul .sound .sound-meter {
+  color: #adadad;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 0;
+  gap: 13px;
+}
+.classroom-grid-items ul .out-temp {
   grid-area: outTemp;
 }
 .classroom-grid-items ul .date {

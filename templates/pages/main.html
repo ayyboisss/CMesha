@@ -6,10 +6,24 @@
         <a href="classroom/{{i[0]}}"  class="classroom-grid-title"><div>{{i[0]}}</div></a>
         <ul>
             <li class="temp"> <i class="fa-solid fa-temperature-three-quarters"></i>{{i[1]}} </li>
-            <li class="outTemp"> No data </li>
+            <li class="out-temp"> No data </li>
             <li class="humidity"> {{i[2]}} </li>
-            <li class="sound"> {{i[3]}} </li>
-            <li class="windSpeed"> {{i[4]}} </li>
+            <li class="sound">
+                <div class="sound-meter">
+                    <i class="fa-solid fa-square-full"></i>
+                    <i class="fa-solid fa-square-full"></i>
+                    <i class="fa-solid fa-square-full"></i>
+                    <i class="fa-solid fa-square-full"></i>
+                    <i class="fa-solid fa-square-full"></i>
+                    <i class="fa-solid fa-square-full"></i>
+                    <i class="fa-solid fa-square-full"></i>
+                    <i class="fa-solid fa-square-full"></i>
+                    <i class="fa-solid fa-square-full"></i>
+                    <i class="fa-solid fa-square-full"></i>
+                    <span class="sound-db">{{i[3]}}dB</span>
+                </div> 
+            </li>
+            <li class="wind-speed"> {{i[4]}} </li>
             <li class="date"> No data </li>
         </ul>
     </div>
