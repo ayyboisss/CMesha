@@ -208,20 +208,26 @@ main{
         height: 100%;
         width: 100%;
         margin: 0px;
-        padding: auto;
         padding-top: 30px;
+        padding-left: clamp(10px, 2%, 1%);
         /* Grid Stuff*/
         display: grid;
         grid-template-areas:
         "temp outTemp sound"
         "humidity windSpd sound"
         "date date sound";
-        grid-template-columns: 1fr 1fr 0.2fr;
-        grid-template-rows: 1fr 1fr 0.2fr;
+        grid-template-columns: 2fr 2fr 0.1fr;
+        grid-template-rows: 2fr 2fr 0.1fr;
         list-style: none;
         text-align: center;
 
         font-size: 1.5rem;
+
+        .icon-text{
+            font-size: 1rem;
+            display:block
+        }
+
         .temp{
             grid-area: temp;
 
@@ -237,24 +243,26 @@ main{
 
         .sound{
             grid-area: sound;
-            min-width: 5em;
-            padding-left: 20px;
             text-align: center;
             
             .sound-db{
-                margin-top: 5px;
-                margin-right: 10px;
+                padding-top: 5px;
+                padding-right: 10px;
                 color: var(--text-color);
                 
             }
 
             .sound-meter{
+                font-size: 1.25rem;
                 color: #adadad;
                 display: flex;
                 flex-direction: column;
-                flex-grow: 0;
                 height: 100%;
-                gap: 3%;
+
+                & > i{
+                    flex-grow: 1;
+                }
+
                 i:hover{
                     color: #F3D8FF;
                 }
