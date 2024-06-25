@@ -9,7 +9,7 @@
         <ul>
             <!-- This entire thing is a mess-->
             <li class="temp">
-                 <i class="fa-solid fa-temperature-three-quarters fa-2lg"></i>
+                 <i class="fa-solid fa-temperature-three-quarters fa-2xl"></i>
                  <small class="icon-text">Temperature</small>
                  {% if i[1] %}
                  <div>{{i[1]}}°C</div>
@@ -19,12 +19,12 @@
             </li>
 
             <li class="outTemp">
-                <i class="fa-solid fa-cloud-sun"></i>
+                <i class="fa-solid fa-cloud-sun fa-2xl"></i>
                 <small class="icon-text">Outside Temperature</small>
                 <div>No Data</div>
             </li>
             <li class="humidity">
-                <i class="fa-solid fa-droplet fa-2lg"></i>
+                <i class="fa-solid fa-droplet fa-2xl"></i>
                 <small class="icon-text">Humidity</small>
                 {% if i[2] %}
                 <div>{{((i[2]*100)|string)[:-2]}}%</div>
@@ -33,7 +33,7 @@
                 {% endif %}
             </li>
             <li class="windSpeed">
-                <i class="fa-solid fa-wind fa-2lg"></i>
+                <i class="fa-solid fa-wind fa-2xl"></i>
                 <small class="icon-text">Ventilation</small>
                 {% if i[4] %}
                 <div>{{i[4]}}m/s</div>
@@ -41,7 +41,7 @@
                 <div>No Data</div>
                 {% endif %}
             </li>
-            <li class="date"><i class="fa-solid fa-clock-rotate-left fa-2lg"></i>
+            <li class="date"><i class="fa-solid fa-clock-rotate-left fa-2xl"></i>
                 <small class="icon-text"> Last Recorded </small>
                 {# Temporary until this column is added
                 {% if i[x] %}
