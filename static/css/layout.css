@@ -197,6 +197,9 @@ main {
   text-align: center;
   font-size: 1.5rem;
 }
+.classroom-grid-items ul li div {
+  font-size: 1rem;
+}
 .classroom-grid-items ul .icon-text {
   font-size: 1rem;
   display: block;
@@ -214,16 +217,17 @@ main {
   grid-area: sound;
   text-align: center;
 }
-.classroom-grid-items ul .sound .sound-db {
-  padding-top: 5px;
-  padding-right: 10px;
+.classroom-grid-items ul .sound .sound-db, .classroom-grid-items ul .sound small {
   color: var(--text-color);
+  font-size: smaller;
 }
 .classroom-grid-items ul .sound .sound-meter {
+  padding-right: 0.5rem;
   font-size: 1.25rem;
   color: #adadad;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   height: 100%;
 }
 .classroom-grid-items ul .sound .sound-meter > i {

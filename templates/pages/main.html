@@ -3,13 +3,55 @@
 <div class="classroom-grid-container">
     {% for i in giga_list %}
     <div class="classroom-grid-items">
-        <a href="classroom/{{i[0]}}"  class="classroom-grid-title"><div>{{i[0]}}</div></a>
+        <a href="classroom/{{i[0]}}"  class="classroom-grid-title">
+            <div>{{i[0]}}</div>
+        </a>
         <ul>
-            <li class="temp"> <i class="fa-solid fa-temperature-three-quarters fa-2lg"></i><small class="icon-text">Temperature</small><div>{{i[1]}}</div></li>
-            <li class="outTemp"> <div>No data</div><small class="icon-text">Outside Temperature</small> </li>
-            <li class="humidity"> <i class="fa-solid fa-droplet fa-2lg"></i><small class="icon-text">Humidity</small> <div>{{i[2]}}</div> </li>
-            <li class="windSpeed"> <i class="fa-solid fa-wind fa-2lg"></i><small class="icon-text">Wind Speed</small><div>{{i[4]}}</div> </li>
-            <li class="date"> <i class="fa-solid fa-clock-rotate-left fa-2lg"></i> <div>No data</div> </li>
+            <!-- This entire thing is a mess-->
+            <li class="temp">
+                 <i class="fa-solid fa-temperature-three-quarters fa-2lg"></i>
+                 <small class="icon-text">Temperature</small>
+                 {% if i[1] %}
+                 <div>{{i[1]}}°C</div>
+                 {% else %}
+                 <div>No Data</div>
+                 {% endif %}
+            </li>
+
+            <li class="outTemp">
+                <i class="fa-solid fa-cloud-sun"></i>
+                <small class="icon-text">Outside Temperature</small>
+                <div>No Data</div>
+            </li>
+            <li class="humidity">
+                <i class="fa-solid fa-droplet fa-2lg"></i>
+                <small class="icon-text">Humidity</small>
+                {% if i[2] %}
+                <div>{{((i[2]*100)|string)[:-2]}}%</div>
+                {% else %}
+                <div>No Data</div>
+                {% endif %}
+            </li>
+            <li class="windSpeed">
+                <i class="fa-solid fa-wind fa-2lg"></i>
+                <small class="icon-text">Ventilation</small>
+                {% if i[4] %}
+                <div>{{i[4]}}m/s</div>
+                {% else %}
+                <div>No Data</div>
+                {% endif %}
+            </li>
+            <li class="date"><i class="fa-solid fa-clock-rotate-left fa-2lg"></i>
+                <small class="icon-text"> Last Recorded </small>
+                {# Temporary until this column is added
+                {% if i[x] %}
+                <div>{{((i[x]*100)|string)[:-2]}}%</div>
+                {% else %}
+                <div>No Data</div>
+                {% endif %}
+                #}
+                <div>No data</div>
+            </li>
             <li class="sound">
                 <div class="sound-meter">
                     <i class="fa-solid fa-square-full"></i>
@@ -22,8 +64,15 @@
                     <i class="fa-solid fa-square-full"></i>
                     <i class="fa-solid fa-square-full"></i>
                     <i class="fa-solid fa-square-full"></i>
-                    <small class="icon-text">Sound</small>
-                    <span class="sound-db">{{i[3]}}dB</span>
+                    <div class="sound-db">
+                        <i class="fa-solid fa-volume-high"></i>
+                        <small class="icon-text">Loudness</small>
+                        {% if i[3] %}
+                        <span>{{i[3]}}dB</span>
+                        {% else %}
+                        <span>No Data</span>
+                        {% endif %}
+                    </div>
                 </div>
             </li>
         </ul>

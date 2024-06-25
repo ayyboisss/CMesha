@@ -49,28 +49,28 @@ def home():
             ClassroomID=i[0]).with_entities(
             TemperatureHumidityDatum.TemperatureReading).first()
         if not temperature:
-            temperature = ('No Data',)
+            temperature = (False,)
         temp_list.append(temperature[0])
 
         humidity = TemperatureHumidityDatum.query.filter_by(
             ClassroomID=i[0]).with_entities(
             TemperatureHumidityDatum.HumidityReading).first()
         if not humidity:
-            humidity = ('No Data',)
+            humidity = (False,)
         temp_list.append(humidity[0])
 
         loudness = LoudnessData.query.filter_by(
             ClassroomID=i[0]).with_entities(
             LoudnessData.LoudnessReading).first()
         if not loudness:
-            loudness = ('0',)
+            loudness = (False,)
         temp_list.append(loudness[0])
 
         wind_speed = AnemometerDatum.query.filter_by(
             ClassroomID=i[0]).with_entities(
             AnemometerDatum.AnemometerReading).first()
         if not wind_speed:
-            wind_speed = ('No Data',)
+            wind_speed = (False,)
         temp_list.append(wind_speed[0])
 
         giga_list.append(temp_list)

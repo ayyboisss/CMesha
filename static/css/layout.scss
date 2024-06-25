@@ -223,6 +223,12 @@ main{
 
         font-size: 1.5rem;
 
+        li{
+            div{
+                font-size: 1rem;
+            }
+        }
+
         .icon-text{
             font-size: 1rem;
             display:block
@@ -246,17 +252,21 @@ main{
             text-align: center;
             
             .sound-db{
-                padding-top: 5px;
-                padding-right: 10px;
                 color: var(--text-color);
-                
+                font-size: smaller;
+            }
+
+            small{
+                @extend .sound-db
             }
 
             .sound-meter{
+                padding-right: 0.5rem;
                 font-size: 1.25rem;
                 color: #adadad;
                 display: flex;
                 flex-direction: column;
+                justify-content: center;
                 height: 100%;
 
                 & > i{
