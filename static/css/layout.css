@@ -193,12 +193,17 @@ main {
   grid-template-columns: 1fr 1fr 0.1fr;
   grid-template-rows: 1fr 1fr 0.1fr;
   row-gap: 20px;
+  -moz-column-gap: 10px;
+       column-gap: 10px;
   list-style: none;
   text-align: center;
   /* There's an issue related with font-size breaking the layout */
   /* via overflowing the content, DO NOT USE font-size */
 }
-.classroom-grid-items ul li div:not(.sound-db) {
+.classroom-grid-items ul li:not(.sound) {
+  border-radius: 200px;
+}
+.classroom-grid-items ul li:not(.sound) div:not(.sound-db) {
   font-size: 2em;
 }
 .classroom-grid-items ul .icon-text {
@@ -243,6 +248,12 @@ main {
 }
 .classroom-grid-items ul .date {
   grid-area: date;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.classroom-grid-items ul .date-text {
+  grid-area: dt;
 }
 
 .sidebar {

@@ -218,13 +218,15 @@ main{
         grid-template-columns: 1fr 1fr 0.1fr;
         grid-template-rows: 1fr 1fr 0.1fr;
         row-gap: 20px;
+        column-gap: 10px;
         list-style: none;
         text-align: center;
 
         /* There's an issue related with font-size breaking the layout */
         /* via overflowing the content, DO NOT USE font-size */
 
-        li{
+        li:not(.sound){
+            border-radius: 200px;
             div:not(.sound-db){
                 font-size: 2em;
             }
@@ -287,6 +289,13 @@ main{
 
         .date{
             grid-area: date;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .date-text{
+            grid-area: dt;
         }
     }
 }

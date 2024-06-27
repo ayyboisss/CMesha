@@ -41,17 +41,14 @@
                 <div>No Data</div>
                 {% endif %}
             </li>
-            <li class="date"><i class="fa-solid fa-clock-rotate-left fa-2xl"></i>
-                <small class="icon-text"> Last Recorded </small>
-                {# Temporary until this column is added
-                {% if i[x] %}
-                <div>{{((i[x]*100)|string)[:-2]}}%</div>
-                {% else %}
-                <div>No Data</div>
-                {% endif %}
-                #}
-                <div>No data</div>
+            <li class="date">
+                <div>
+                    <i class="fa-solid fa-clock-rotate-left fa-2xl"></i>
+                    <small class="icon-text"> Last Recorded </small>
+                </div>
+                <div class="date-text"> No data </div>
             </li>
+
             <li class="sound">
                 <div class="sound-meter">
                     <i class="fa-solid fa-square-full"></i>
