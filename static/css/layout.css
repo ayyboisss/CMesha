@@ -182,11 +182,13 @@ main {
 }
 .classroom-grid-items ul {
   box-sizing: border-box;
+  position: relative;
   height: 100%;
   width: 100%;
   margin: 0px;
   padding-top: 30px;
   padding-left: clamp(10px, 2%, 1%);
+  padding-bottom: 10px;
   /* Grid Stuff*/
   display: grid;
   grid-template-areas: "temp outTemp sound" "humidity windSpd sound" "date date sound";
@@ -201,10 +203,16 @@ main {
   /* via overflowing the content, DO NOT USE font-size */
 }
 .classroom-grid-items ul li:not(.sound) {
-  border-radius: 200px;
+  background-color: #636363;
+  border-radius: 1%;
+  position: relative;
 }
 .classroom-grid-items ul li:not(.sound) div:not(.sound-db) {
-  font-size: 2em;
+  font-size: 1.5em;
+}
+.classroom-grid-items ul li:not(.sound) > * {
+  position: relative;
+  top: 20%;
 }
 .classroom-grid-items ul .icon-text {
   font-size: 1rem;
@@ -248,12 +256,23 @@ main {
 }
 .classroom-grid-items ul .date {
   grid-area: date;
-  display: flex;
-  justify-content: center;
+  display: grid;
+  grid-template-areas: "icon st" "icon text";
   align-items: center;
+  gap: 20px;
 }
-.classroom-grid-items ul .date-text {
-  grid-area: dt;
+.classroom-grid-items ul .date div i {
+  font-size: 2rem;
+  grid-area: icon;
+}
+.classroom-grid-items ul .date div .icon-text {
+  grid-area: st;
+}
+.classroom-grid-items ul .date div .date-text {
+  grid-area: text;
+}
+.classroom-grid-items ul .date .date-text {
+  font-size: 1rem;
 }
 
 .sidebar {
