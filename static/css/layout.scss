@@ -1,6 +1,11 @@
 /* imports */
 @import url(//fonts.googleapis.com/css?family=Nunito);
 
+.icon::before {
+    display: inline-block;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+  }
 /* GLOBAL VARIBALES */
 
 :root{
@@ -228,20 +233,33 @@ main{
         /* via overflowing the content, DO NOT USE font-size */
 
         li:not(.sound){
-            background-color: #636363;
-            border-radius: 1%;
-            position: relative;
+            white-space: nowrap;
+            background-color: #f3d8ff0e;
+            border-radius: 1rem;
             div:not(.sound-db){
-                font-size: 1.5em;
+                font-size: 2vh;
+            }
+            & > *{
+                display: block;
+            }
+            & > i{
+                width: 100%;
+                height: 50%;
+                &::before{
+                    position: relative;
+                    top: 50%;
+                }
             }
 
-            & > *{
-                position: relative;
-                top: 20%;
+            & > small{
+                padding: 0;
             }
+
+
         }
 
         .icon-text{
+            color: #fbf2ff;
             font-size: 1rem;
             padding-top: 10px;
             display:block
@@ -298,27 +316,39 @@ main{
 
         .date{
             grid-area: date;
-            display: grid;
-            grid-template-areas:
-            "icon st"
-            "icon text";
-            align-items: center;
-            gap: 20px;
-            div{
-                i{
-                    font-size: 2rem;
+
+            .date-grid{
+                margin-left: 15%;
+                margin-right: 20%;
+                display: grid;
+                grid-template-areas:
+                "icon st"
+                "icon text";
+                grid-template-columns: 1fr 1fr;
+                grid-template-rows: 1fr 1fr;
+                column-gap: 20px;
+                & > i{
                     grid-area: icon;
+                    display: block;
+                    position: relative;
+                    height: 100%;
+                }
+                i::before{
+                    position: relative;
+                    font-size: 2rem;
+                    top: 0.8vh;
+
+
                 }
                 .icon-text{
                     grid-area: st;
+                    padding: 0px;
+                    height: 100%;
                 }
                 .date-text{
                     grid-area: text;
+                    height: 100%;
                 }
-            }
-
-            .date-text{
-                font-size: 1rem;
             }
         }
     }
