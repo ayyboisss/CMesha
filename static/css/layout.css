@@ -161,6 +161,7 @@ main {
   left: 50%;
   transform: translate(-50%, 0);
   top: -1em;
+  z-index: 1;
   /* text inside the title box*/
 }
 .classroom-grid-title:hover {
@@ -187,6 +188,8 @@ main {
   /* Third grid */
 }
 .classroom-grid-items ul {
+  /* There's an issue related with font-size breaking the layout */
+  /* via overflowing the content, DO NOT USE font-size */
   box-sizing: border-box;
   position: relative;
   height: 100%;
@@ -200,13 +203,11 @@ main {
   grid-template-areas: "temp outTemp sound" "humidity windSpd sound" "date date sound";
   grid-template-columns: 1fr 1fr 0.1fr;
   grid-template-rows: 1fr 1fr 0.1fr;
-  row-gap: 20px;
+  row-gap: 0.5em;
   -moz-column-gap: 10px;
        column-gap: 10px;
   list-style: none;
   text-align: center;
-  /* There's an issue related with font-size breaking the layout */
-  /* via overflowing the content, DO NOT USE font-size */
 }
 .classroom-grid-items ul li:not(.sound) {
   white-space: nowrap;
@@ -214,7 +215,7 @@ main {
   border-radius: 1rem;
 }
 .classroom-grid-items ul li:not(.sound) div:not(.sound-db) {
-  font-size: 2vh;
+  font-size: 1.2em;
 }
 .classroom-grid-items ul li:not(.sound) > * {
   display: block;
@@ -225,13 +226,13 @@ main {
 }
 .classroom-grid-items ul li:not(.sound) > i::before {
   position: relative;
-  top: 50%;
+  bottom: -50%;
 }
 .classroom-grid-items ul li:not(.sound) > small {
   padding: 0;
 }
 .classroom-grid-items ul .icon-text {
-  color: #fbf2ff;
+  color: #f0ccff;
   font-size: 1rem;
   padding-top: 10px;
   display: block;
@@ -275,14 +276,12 @@ main {
   grid-area: date;
 }
 .classroom-grid-items ul .date .date-grid {
-  margin-left: 15%;
+  margin-left: 20%;
   margin-right: 20%;
   display: grid;
   grid-template-areas: "icon st" "icon text";
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 0.5fr 1fr;
   grid-template-rows: 1fr 1fr;
-  -moz-column-gap: 20px;
-       column-gap: 20px;
 }
 .classroom-grid-items ul .date .date-grid > i {
   grid-area: icon;
@@ -293,16 +292,18 @@ main {
 .classroom-grid-items ul .date .date-grid i::before {
   position: relative;
   font-size: 2rem;
-  top: 0.8vh;
+  bottom: -25%;
 }
 .classroom-grid-items ul .date .date-grid .icon-text {
   grid-area: st;
   padding: 0px;
   height: 100%;
+  margin-top: 5px;
 }
 .classroom-grid-items ul .date .date-grid .date-text {
   grid-area: text;
   height: 100%;
+  margin-bottom: 5px;
 }
 
 .sidebar {

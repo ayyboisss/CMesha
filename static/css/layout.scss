@@ -182,6 +182,7 @@ main{
     left: 50%;
     transform: translate(-50%, 0);
     top: -1em;
+    z-index: 1;
     
     &:hover{
         border: #F3D8FF solid;
@@ -208,6 +209,8 @@ main{
     border: rgb(170, 170, 170) solid;
     /* Third grid */
     ul{
+        /* There's an issue related with font-size breaking the layout */
+        /* via overflowing the content, DO NOT USE font-size */
         box-sizing: border-box;
         position: relative;
         height: 100%;
@@ -224,20 +227,19 @@ main{
         "date date sound";
         grid-template-columns: 1fr 1fr 0.1fr;
         grid-template-rows: 1fr 1fr 0.1fr;
-        row-gap: 20px;
+        row-gap: 0.5em;
         column-gap: 10px;
         list-style: none;
         text-align: center;
 
-        /* There's an issue related with font-size breaking the layout */
-        /* via overflowing the content, DO NOT USE font-size */
+
 
         li:not(.sound){
             white-space: nowrap;
             background-color: #f3d8ff0e;
             border-radius: 1rem;
             div:not(.sound-db){
-                font-size: 2vh;
+                font-size: 1.2em;
             }
             & > *{
                 display: block;
@@ -247,7 +249,7 @@ main{
                 height: 50%;
                 &::before{
                     position: relative;
-                    top: 50%;
+                    bottom: -50%;
                 }
             }
 
@@ -259,7 +261,7 @@ main{
         }
 
         .icon-text{
-            color: #fbf2ff;
+            color: #f0ccff;
             font-size: 1rem;
             padding-top: 10px;
             display:block
@@ -318,15 +320,14 @@ main{
             grid-area: date;
 
             .date-grid{
-                margin-left: 15%;
+                margin-left: 20%;
                 margin-right: 20%;
                 display: grid;
                 grid-template-areas:
                 "icon st"
                 "icon text";
-                grid-template-columns: 1fr 1fr;
+                grid-template-columns: 0.5fr 1fr;
                 grid-template-rows: 1fr 1fr;
-                column-gap: 20px;
                 & > i{
                     grid-area: icon;
                     display: block;
@@ -336,7 +337,7 @@ main{
                 i::before{
                     position: relative;
                     font-size: 2rem;
-                    top: 0.8vh;
+                    bottom: -25%;
 
 
                 }
@@ -344,10 +345,12 @@ main{
                     grid-area: st;
                     padding: 0px;
                     height: 100%;
+                    margin-top: 5px;
                 }
                 .date-text{
                     grid-area: text;
                     height: 100%;
+                    margin-bottom: 5px;
                 }
             }
         }
