@@ -181,7 +181,7 @@ main {
   position: relative;
   margin: 1em;
   box-sizing: content-box;
-  /* Boxesthings*/
+  /* Boxesthings */
   background-color: #555555;
   border-radius: 20px;
   border: rgb(170, 170, 170) solid;
@@ -189,7 +189,7 @@ main {
 }
 .classroom-grid-items ul {
   /* There's an issue related with font-size breaking the layout */
-  /* via overflowing the content, DO NOT USE font-size */
+  /* via overflowing the content, DO NOT USE font-size here */
   box-sizing: border-box;
   position: relative;
   height: 100%;
@@ -198,7 +198,7 @@ main {
   padding-top: 30px;
   padding-left: clamp(10px, 2%, 1%);
   padding-bottom: 10px;
-  /* Grid Stuff*/
+  /* Grid Stuff */
   display: grid;
   grid-template-areas: "temp outTemp sound" "humidity windSpd sound" "date date sound";
   grid-template-columns: 1fr 1fr 0.1fr;
