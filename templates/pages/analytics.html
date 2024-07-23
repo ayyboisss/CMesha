@@ -17,15 +17,9 @@
 
         // Create the data table.
         var data = new google.visualization.DataTable();
-        data.addColumn('string', 'Topping');
-        data.addColumn('number', 'Slices');
-        data.addRows([
-          ['Mushrooms', 3],
-          ['Onions', 1],
-          ['Olives', 1],
-          ['Zucchini', 1],
-          ['Pepperoni', 2]
-        ]);
+        data.addColumn('number', 'Temperature');
+        data.addColumn('date', 'Time');
+        data.addRows({{loudness|safe}});
 
         // Set chart options
         var options = {'title':'How Much Pizza I Ate Last Night',
@@ -45,28 +39,28 @@
 <h2> Loudness </h2>
 {% for i in loudness %}
 <h3>
-    {{i[0]}}
+    {{i}}
 </h3>
 {% endfor %}
 
 <h2> Temperature </h2>
 {% for i in temperature %}
 <h3>
-    {{i[0]}}
+    {{i}}
 </h3>
 {% endfor %}
 
 <h2> Humidity </h2>
 {% for i in humidity %}
 <h3>
-    {{i[0]}}
+    {{i}}
 </h3>
 {% endfor %}
 
 <h2> Wind Speed </h2>
 {% for i in wind_speed %}
 <h3> 
-    {{i[0]}}
+    {{i}}
 </h3>
 {% endfor %}
 

@@ -1,6 +1,22 @@
 from database import app, Classroom, LoudnessData, TemperatureHumidityDatum, AnemometerDatum
 from flask import render_template
 
+def tuple_to_list(content, convert_date):
+    "Turn a SQLite query tuple into a list"
+    result = []
+    if convert_date:
+        for i in content:
+            temp_list = []
+            temp_list.append(i[0])
+            date = i[1].split('-')
+            new_date = f"Date({date[0]}, {date[1]}, {date[2]})"
+            temp_list.append(new_date)
+            result.append(temp_list)
+    else:
+        for i in content:
+            result.append([*i])
+    return result
+    
 
 def kowalski_analyze(classroom_id=str):
     "Get all data relevent to the specific classroom"
@@ -8,24 +24,37 @@ def kowalski_analyze(classroom_id=str):
     result.append(classroom_id)
 
     # Loudness
-    result.append(LoudnessData.query.filter_by(
-        ClassroomID=classroom_id).with_entities(
-        LoudnessData.LoudnessReading).all())
+    result.append(
+        tuple_to_list(
+            LoudnessData.query.filter_by(
+                ClassroomID=classroom_id).with_entities(
+                    LoudnessData.LoudnessReading, LoudnessData.DateRecorded).all()
+        , True)
+    )
 
     # Temperature / Humidity
-    result.append(TemperatureHumidityDatum.query.filter_by(
-        ClassroomID=classroom_id).with_entities(
-        TemperatureHumidityDatum.TemperatureReading).all())
+    result.append(
+        tuple_to_list(
+            TemperatureHumidityDatum.query.filter_by(
+                ClassroomID=classroom_id).with_entities(
+                    TemperatureHumidityDatum.TemperatureReading, TemperatureHumidityDatum.DateRecorded).all()
+        , True)
+    )
 
-    result.append(TemperatureHumidityDatum.query.filter_by(
-        ClassroomID=classroom_id).with_entities(
-        TemperatureHumidityDatum.HumidityReading).all())
+    result.append(
+        tuple_to_list(TemperatureHumidityDatum.query.filter_by(
+                ClassroomID=classroom_id).with_entities(
+                    TemperatureHumidityDatum.HumidityReading, TemperatureHumidityDatum.DateRecorded).all()
+        , True)
+    )
 
     # Wind speed
-    result.append(AnemometerDatum.query.filter_by(
-        ClassroomID=classroom_id).with_entities(
-        AnemometerDatum.AnemometerReading).all())
-
+    result.append(
+        tuple_to_list(AnemometerDatum.query.filter_by(
+                ClassroomID=classroom_id).with_entities(
+                    AnemometerDatum.AnemometerReading, AnemometerDatum.DateRecorded).all()
+        , True)
+    )
     return result
 
 
