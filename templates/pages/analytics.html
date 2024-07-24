@@ -3,9 +3,18 @@
 {# TESTING DISPLAY #}
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
+      // Fix the dates so Google charts actually accepts it
       var loudnessArray = {{loudness|safe}};
       var fixedLoudnessArray = loudnessArray.map(nested => nested.map(element => eval(element)));
 
+      var temperatureArray = {{temperature|safe}};
+      var fixedTemperatureArray = temperatureArray.map(nested => nested.map(element => eval(element)));
+
+      var humidityArray = {{humidity|safe}};
+      var fixedHumidityArray =  humidityArray.map(nested => nested.map(element => eval(element)));
+      
+      var ventilationArray = {{ventilation|safe}};
+      var fixedVentilationArray = ventilationArray.map(nested => nested.map(element => eval(element)));
 
       // Load the Visualization API and the corechart package.
       google.charts.load('current', {'packages':['corechart']});
@@ -17,54 +26,248 @@
       // instantiates the pie chart, passes in the data and
       // draws it.
       function drawChart() {
+        
+        // Graph styles so I don't have to change each variable from the same graph
+        let $backgroundColor = '#303030';
+        let $textColor = '#C9E4CA';
+        let $gridColor = '#1E4D6B';
+        let $lineColor = '#F3D8FF';
+        let $titleColor = '#C9E4CA';
 
         // Create the data table.
+        // First Graph
         var data = new google.visualization.DataTable();
         data.addColumn('date', 'Time');
-        data.addColumn('number', 'Temperature');
+        data.addColumn('number', 'Decibels (dB)');
         data.addRows(fixedLoudnessArray);
 
         // Set chart options
-        var options = {'title':'How Much Pizza I Ate Last Night',
-                       'width':400,
-                       'height':300};
+        var options = {
+                'title':'Loudness',
+                'width': 854,
+                'height': 480,
+                backgroundColor: $backgroundColor,
+
+                vAxis:{
+                    title: "Decibels (dB)",
+                    textStyle:{
+                        color: $textColor
+                    },
+                    gridlines:{
+                        color: $gridColor
+                    }
+                },
+
+                hAxis:{
+                    title: "Time",
+                    textStyle:{
+                        color: $textColor
+                    },
+                    gridlines: {
+                        color: $gridColor
+                    }
+                },
+
+                
+                legend:{
+                    position:"none"
+                },
+
+                titleTextStyle: {
+                    color: $titleColor
+                },
+
+                series:{
+                    0:{
+                        color: $lineColor
+                    }
+                }
+            };
+        
+        // Instantiate Chart
+        var loudChart = new google.visualization.LineChart(document.getElementById('loud_chart'));
+        loudChart.draw(data, options);
+
+        // Second Graph
+        var data = new google.visualization.DataTable();
+        data.addColumn('date', 'Time');
+        data.addColumn('number', 'Celcius (­­°C)');
+        data.addRows(fixedTemperatureArray);
+
+        // Set chart options
+        var options = {
+                'title':'Temperature',
+                'width': 854,
+                'height': 480,
+                backgroundColor: $backgroundColor,
+
+                vAxis:{
+                    title: "Celcius (°C)",
+                    titleTextStyle:{
+                        color: $textColor
+                    }, 
+                    textStyle:{
+                        color: $textColor
+                    },
+                    gridlines:{
+                        color: $gridColor
+                    }
+                },
+
+                hAxis:{
+                    title: "Time",
+                    titleTextStyle:{
+                        color: $textColor
+                    },
+                    textStyle:{
+                        color: $textColor
+                    },
+                    gridlines: {
+                        color: $gridColor
+                    }
+                },
+
+                
+                legend:{
+                    position:"none"
+                },
+
+                titleTextStyle: {
+                    color: $titleColor
+                },
+
+                series:{
+                    0:{
+                        color: $lineColor
+                    }
+                }
+            };
 
         // Instantiate and draw our chart, passing in some options.
-        var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
-        chart.draw(data, options);
+        var tempChart = new google.visualization.LineChart(document.getElementById('temp_chart'));
+        tempChart.draw(data, options);
+        
+        // Third Graph
+        var data = new google.visualization.DataTable();
+        data.addColumn('date', 'Time');
+        data.addColumn('number', 'Relative Humidity (%)');
+        data.addRows(fixedHumidityArray);
+
+        // Set chart options
+        var options = {
+                'title':'Humidity',
+                'width': 854,
+                'height': 480,
+                backgroundColor: $backgroundColor,
+
+                vAxis:{
+                    title: "Relative Humidity (%)",
+                    titleTextStyle:{
+                        color: $textColor
+                    },
+                    textStyle:{
+                        color: $textColor
+                    },
+                    gridlines:{
+                        color: $gridColor
+                    }
+                },
+
+                hAxis:{
+                    title: "Time",
+                    titleTextStyle:{
+                        color: $textColor
+                    },
+                    textStyle:{
+                        color: $textColor
+                    },
+                    gridlines: {
+                        color: $gridColor
+                    }
+                },
+
+                
+                legend:{
+                    position:"none"
+                },
+
+                titleTextStyle: {
+                    color: $titleColor
+                },
+
+                series:{
+                    0:{
+                        color: $lineColor
+                    }
+                }
+            };
+        var humidityChart = new google.visualization.LineChart(document.getElementById('humidity_chart'));
+        humidityChart.draw(data, options);
+
+        // Fourth Graph
+        var data = new google.visualization.DataTable();
+        data.addColumn('date', 'Time');
+        data.addColumn('number', 'Wind Speed (m/s)');
+        data.addRows(fixedVentilationArray);
+
+        // Set chart options
+        var options = {
+                'title':'Ventilation',
+                'width': 854,
+                'height': 480,
+                backgroundColor: $backgroundColor,
+
+                vAxis:{
+                    title: "Wind Speed (m/s)",
+                    titleTextStyle:{
+                        color: $textColor
+                    },
+                    textStyle:{
+                        color: $textColor
+                    },
+                    gridlines:{
+                        color: $gridColor
+                    }
+                },
+
+                hAxis:{
+                    title: "Time",
+                    titleTextStyle:{
+                        color: $textColor
+                    },
+                    textStyle:{
+                        color: $textColor
+                    },
+                    gridlines: {
+                        color: $gridColor
+                    }
+                },
+
+                
+                legend:{
+                    position:"none"
+                },
+
+                titleTextStyle: {
+                    color: $titleColor
+                },
+
+                series:{
+                    0:{
+                        color: $lineColor
+                    }
+                }
+            };
+        var ventilationChart = new google.visualization.LineChart(document.getElementById('vent_chart'));
+        ventilationChart.draw(data, options);
+
+
       }
 </script>
 
-<div id="chart_div"></div>
-<h1> OVERLFOW IS CURRENTLY DISABLED </h1>
-<h1> {{classroom}} </h1>
-
-<h2> Loudness </h2>
-{% for i in loudness %}
-<h3>
-    {{i}}
-</h3>
-{% endfor %}
-
-<h2> Temperature </h2>
-{% for i in temperature %}
-<h3>
-    {{i}}
-</h3>
-{% endfor %}
-
-<h2> Humidity </h2>
-{% for i in humidity %}
-<h3>
-    {{i}}
-</h3>
-{% endfor %}
-
-<h2> Wind Speed </h2>
-{% for i in wind_speed %}
-<h3> 
-    {{i}}
-</h3>
-{% endfor %}
+<div id="temp_chart"></div>
+<div id="loud_chart"></div>
+<div id="humidity_chart"></div>
+<div id="vent_chart"></div>
 
 {% endblock %}

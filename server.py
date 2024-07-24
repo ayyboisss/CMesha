@@ -15,7 +15,9 @@ def tuple_to_list(content, convert_date):
     else:
         for i in content:
             result.append([*i])
-    return result 
+
+    print(result)
+    return result
 
 def kowalski_analyze(classroom_id=str):
     "Get all data relevent to the specific classroom"
@@ -30,6 +32,7 @@ def kowalski_analyze(classroom_id=str):
                     LoudnessData.DateRecorded, LoudnessData.LoudnessReading).all()
         , True)
     )
+
 
     # Temperature / Humidity
     result.append(
@@ -54,6 +57,7 @@ def kowalski_analyze(classroom_id=str):
                     AnemometerDatum.DateRecorded, AnemometerDatum.AnemometerReading).all()
         , True)
     )
+
     return result
 
 
@@ -113,12 +117,12 @@ def analytics(classroom_id):
     loudness = data[1]
     temperature = data[2]
     humidity = data[3]
-    wind_speed = data[4]
+    ventilation = data[4]
 
     return (render_template("pages/analytics.html",
                             classroom=classroom_id, loudness=loudness,
                             temperature=temperature, humidity=humidity,
-                            wind_speed=wind_speed))
+                            ventilation=ventilation))
 
 
 @app.route("/staff")
