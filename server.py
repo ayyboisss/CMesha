@@ -7,16 +7,15 @@ def tuple_to_list(content, convert_date):
     if convert_date:
         for i in content:
             temp_list = []
-            temp_list.append(i[0])
-            date = i[1].split('-')
-            new_date = f"Date({date[0]}, {date[1]}, {date[2]})"
+            date = i[0].split('-')
+            new_date = f"new Date({date[0]}, {date[1]}, {date[2]})"
             temp_list.append(new_date)
+            temp_list.append(i[1])
             result.append(temp_list)
     else:
         for i in content:
             result.append([*i])
-    return result
-    
+    return result 
 
 def kowalski_analyze(classroom_id=str):
     "Get all data relevent to the specific classroom"
@@ -28,7 +27,7 @@ def kowalski_analyze(classroom_id=str):
         tuple_to_list(
             LoudnessData.query.filter_by(
                 ClassroomID=classroom_id).with_entities(
-                    LoudnessData.LoudnessReading, LoudnessData.DateRecorded).all()
+                    LoudnessData.DateRecorded, LoudnessData.LoudnessReading).all()
         , True)
     )
 
@@ -37,14 +36,14 @@ def kowalski_analyze(classroom_id=str):
         tuple_to_list(
             TemperatureHumidityDatum.query.filter_by(
                 ClassroomID=classroom_id).with_entities(
-                    TemperatureHumidityDatum.TemperatureReading, TemperatureHumidityDatum.DateRecorded).all()
+                    TemperatureHumidityDatum.DateRecorded, TemperatureHumidityDatum.TemperatureReading).all()
         , True)
     )
 
     result.append(
         tuple_to_list(TemperatureHumidityDatum.query.filter_by(
                 ClassroomID=classroom_id).with_entities(
-                    TemperatureHumidityDatum.HumidityReading, TemperatureHumidityDatum.DateRecorded).all()
+                    TemperatureHumidityDatum.DateRecorded, TemperatureHumidityDatum.HumidityReading).all()
         , True)
     )
 
@@ -52,7 +51,7 @@ def kowalski_analyze(classroom_id=str):
     result.append(
         tuple_to_list(AnemometerDatum.query.filter_by(
                 ClassroomID=classroom_id).with_entities(
-                    AnemometerDatum.AnemometerReading, AnemometerDatum.DateRecorded).all()
+                    AnemometerDatum.DateRecorded, AnemometerDatum.AnemometerReading).all()
         , True)
     )
     return result
