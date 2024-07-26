@@ -1,5 +1,56 @@
 /* imports */
 @import url(//fonts.googleapis.com/css?family=Nunito);
+main {
+  padding: 0;
+}
+
+.chart-container {
+  margin: auto;
+  display: grid;
+  grid-template-rows: 0.1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas: "title title" "temp humidity" "vent loud";
+  background-color: #424242;
+  row-gap: 10px;
+  padding-bottom: 2%;
+  border: 5px #adadad solid;
+  border-radius: 1rem;
+}
+
+.title {
+  grid-area: title;
+  margin: auto;
+  position: relative;
+}
+.title > h1 {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 0);
+  top: -1.5em;
+  z-index: 1;
+  background: #777777;
+}
+
+#temp_chart {
+  grid-area: temp;
+  margin: auto;
+}
+
+#loud_chart {
+  grid-area: loud;
+  margin: auto;
+}
+
+#humidity_chart {
+  grid-area: humidity;
+  margin: auto;
+}
+
+#vent_chart {
+  grid-area: vent;
+  margin: auto;
+}
+
 .icon::before {
   display: inline-block;
   text-rendering: auto;

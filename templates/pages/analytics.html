@@ -30,9 +30,14 @@
         // Graph styles so I don't have to change each variable from the same graph
         let $backgroundColor = '#303030';
         let $textColor = '#C9E4CA';
-        let $gridColor = '#1E4D6B';
+        let $gridColor = '#636363';
         let $lineColor = '#F3D8FF';
         let $titleColor = '#C9E4CA';
+        let $width = 720;
+        let $height = 360;
+        let $chartWidth = '90%';
+        let $chartHeight = '70%';
+        let $font = "Nunito";
 
         // Create the data table.
         // First Graph
@@ -44,14 +49,21 @@
         // Set chart options
         var options = {
                 'title':'Loudness',
-                'width': 854,
-                'height': 480,
+                'width': $width,
+                'height': $height,
                 backgroundColor: $backgroundColor,
+                'chartArea': {'width': $chartWidth, 'height': $chartHeight},
+                'format': 'dB',
+                fontName: $font,
 
                 vAxis:{
                     title: "Decibels (dB)",
+                    slantedText: false,
+                    titleTextStyle:{
+                        color: $textColor,
+                    }, 
                     textStyle:{
-                        color: $textColor
+                        color: $textColor,
                     },
                     gridlines:{
                         color: $gridColor
@@ -60,6 +72,9 @@
 
                 hAxis:{
                     title: "Time",
+                    titleTextStyle:{
+                        color: $textColor
+                    },
                     textStyle:{
                         color: $textColor
                     },
@@ -67,14 +82,13 @@
                         color: $gridColor
                     }
                 },
-
                 
                 legend:{
                     position:"none"
                 },
 
                 titleTextStyle: {
-                    color: $titleColor
+                    color: $titleColor,
                 },
 
                 series:{
@@ -97,9 +111,11 @@
         // Set chart options
         var options = {
                 'title':'Temperature',
-                'width': 854,
-                'height': 480,
+                'width': $width,
+                'height': $height,
                 backgroundColor: $backgroundColor,
+                'chartArea': {'width': $chartWidth, 'height': $chartHeight},
+                fontName: $font,
 
                 vAxis:{
                     title: "Celcius (°C)",
@@ -156,9 +172,11 @@
         // Set chart options
         var options = {
                 'title':'Humidity',
-                'width': 854,
-                'height': 480,
+                'width': $width,
+                'height': $height,
                 backgroundColor: $backgroundColor,
+                'chartArea': {'width': $chartWidth, 'height': $chartHeight},
+                fontName: $font,
 
                 vAxis:{
                     title: "Relative Humidity (%)",
@@ -213,9 +231,11 @@
         // Set chart options
         var options = {
                 'title':'Ventilation',
-                'width': 854,
-                'height': 480,
+                'width': $width,
+                'height': $height,
                 backgroundColor: $backgroundColor,
+                'chartArea': {'width': $chartWidth, 'height': $chartHeight},
+                fontName: $font,
 
                 vAxis:{
                     title: "Wind Speed (m/s)",
@@ -264,10 +284,11 @@
 
       }
 </script>
-
-<div id="temp_chart"></div>
-<div id="loud_chart"></div>
-<div id="humidity_chart"></div>
-<div id="vent_chart"></div>
-
+<div class="chart-container">
+    <div class="title"><h1>{{classroom}} </h1> </div>
+    <div id="temp_chart"></div>
+    <div id="humidity_chart"></div>
+    <div id="vent_chart"></div>
+    <div id="loud_chart"></div>
+</div> 
 {% endblock %}
