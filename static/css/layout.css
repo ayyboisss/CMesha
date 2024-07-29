@@ -10,11 +10,13 @@ main {
   grid-template-rows: 0.1fr 1fr 1fr;
   grid-template-columns: 1fr 1fr;
   grid-template-areas: "title title" "temp humidity" "vent loud";
-  background-color: #424242;
   row-gap: 10px;
   padding-bottom: 2%;
+}
+.chart-container > *:not(.title) {
   border: 5px #adadad solid;
   border-radius: 1rem;
+  background-color: #424242;
 }
 
 .title {

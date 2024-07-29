@@ -10,11 +10,14 @@ main{
         "title title"
         "temp humidity"
         "vent loud" ;
-    background-color: #424242;
     row-gap: 10px;
     padding-bottom: 2%;
-    border: 5px #adadad solid;
-    border-radius: 1rem;
+
+    & > *:not(.title){
+        border: 5px #adadad solid;
+        border-radius: 1rem;
+        background-color: #424242;
+    }
 }
 
 .title{

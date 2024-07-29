@@ -41,13 +41,13 @@
 
         // Create the data table.
         // First Graph
-        var data = new google.visualization.DataTable();
-        data.addColumn('date', 'Time');
-        data.addColumn('number', 'Decibels (dB)');
-        data.addRows(fixedLoudnessArray);
+        var loudData = new google.visualization.DataTable();
+        loudData.addColumn('date', 'Time');
+        loudData.addColumn('number', 'Decibels (dB)');
+        loudData.addRows(fixedLoudnessArray);
 
         // Set chart options
-        var options = {
+        var loudOptions = {
                 'title':'Loudness',
                 'width': $width,
                 'height': $height,
@@ -100,16 +100,15 @@
         
         // Instantiate Chart
         var loudChart = new google.visualization.LineChart(document.getElementById('loud_chart'));
-        loudChart.draw(data, options);
 
         // Second Graph
-        var data = new google.visualization.DataTable();
-        data.addColumn('date', 'Time');
-        data.addColumn('number', 'Celcius (­­°C)');
-        data.addRows(fixedTemperatureArray);
+        var tempData = new google.visualization.DataTable();
+        tempData.addColumn('date', 'Time');
+        tempData.addColumn('number', 'Celcius (­­°C)');
+        tempData.addRows(fixedTemperatureArray);
 
         // Set chart options
-        var options = {
+        var tempOptions = {
                 'title':'Temperature',
                 'width': $width,
                 'height': $height,
@@ -161,16 +160,15 @@
 
         // Instantiate and draw our chart, passing in some options.
         var tempChart = new google.visualization.LineChart(document.getElementById('temp_chart'));
-        tempChart.draw(data, options);
         
         // Third Graph
-        var data = new google.visualization.DataTable();
-        data.addColumn('date', 'Time');
-        data.addColumn('number', 'Relative Humidity (%)');
-        data.addRows(fixedHumidityArray);
+        var humidityData = new google.visualization.DataTable();
+        humidityData.addColumn('date', 'Time');
+        humidityData.addColumn('number', 'Relative Humidity (%)');
+        humidityData.addRows(fixedHumidityArray);
 
         // Set chart options
-        var options = {
+        var humidityOptions = {
                 'title':'Humidity',
                 'width': $width,
                 'height': $height,
@@ -220,16 +218,15 @@
                 }
             };
         var humidityChart = new google.visualization.LineChart(document.getElementById('humidity_chart'));
-        humidityChart.draw(data, options);
 
         // Fourth Graph
-        var data = new google.visualization.DataTable();
+        var ventData = new google.visualization.DataTable();
         data.addColumn('date', 'Time');
         data.addColumn('number', 'Wind Speed (m/s)');
         data.addRows(fixedVentilationArray);
 
         // Set chart options
-        var options = {
+        var ventOptions = {
                 'title':'Ventilation',
                 'width': $width,
                 'height': $height,
@@ -279,10 +276,21 @@
                 }
             };
         var ventilationChart = new google.visualization.LineChart(document.getElementById('vent_chart'));
-        ventilationChart.draw(data, options);
-
-
       }
+      //create trigger to resizeEnd event     
+    $(window).resize(function() {
+        if(this.resizeTO) clearTimeout(this.resizeTO);
+        this.resizeTO = setTimeout(function() {
+            $(this).trigger('resizeEnd');
+        }, 500);
+    });
+
+//redraw graph when window resize is completed  
+    $(window).on('resizeEnd', function() {
+        loudChart.draw(loudnessData, loudOptions);
+        tempChart.draw(tempData, tempOptions);
+        humidityChart.draw(humidityData, humidityOptions);
+    });
 </script>
 <div class="chart-container">
     <div class="title"><h1>{{classroom}} </h1> </div>
