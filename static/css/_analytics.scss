@@ -1,6 +1,11 @@
 main{
     padding: 0;
 }
+
+@media screen and (max-width: 729px) {
+
+}
+
 .chart-container{
     margin: auto;
     display: grid;

@@ -1,6 +1,7 @@
 from database import app, Classroom, LoudnessData, TemperatureHumidityDatum, AnemometerDatum
 from flask import render_template
 
+
 def tuple_to_list(content, convert_date):
     "Turn a SQLite query tuple into a list"
     result = []
@@ -18,6 +19,7 @@ def tuple_to_list(content, convert_date):
 
     print(result)
     return result
+
 
 def kowalski_analyze(classroom_id=str):
     "Get all data relevent to the specific classroom"
