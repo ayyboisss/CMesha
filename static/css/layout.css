@@ -1,5 +1,6 @@
 /* imports */
 @import url(//fonts.googleapis.com/css?family=Nunito);
+<<<<<<< HEAD
 main {
   padding: 0;
 }
@@ -53,6 +54,8 @@ main {
   margin: auto;
 }
 
+=======
+>>>>>>> parent of a7cd50e (Style analytics.html)
 .icon::before {
   display: inline-block;
   text-rendering: auto;

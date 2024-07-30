@@ -29,37 +29,33 @@ def kowalski_analyze(classroom_id=str):
         tuple_to_list(
             LoudnessData.query.filter_by(
                 ClassroomID=classroom_id).with_entities(
-                    LoudnessData.DateRecorded, LoudnessData.LoudnessReading).order_by(
-                        LoudnessData.DateRecorded.asc()
-                        ).all(), True)
+                    LoudnessData.DateRecorded, LoudnessData.LoudnessReading).all()
+        , True)
     )
+
 
     # Temperature / Humidity
     result.append(
         tuple_to_list(
             TemperatureHumidityDatum.query.filter_by(
-
                 ClassroomID=classroom_id).with_entities(
-                    TemperatureHumidityDatum.DateRecorded, TemperatureHumidityDatum.TemperatureReading).order_by(
-                        TemperatureHumidityDatum.DateRecorded.asc()
-                    ).all(), True)
+                    TemperatureHumidityDatum.DateRecorded, TemperatureHumidityDatum.TemperatureReading).all()
+        , True)
     )
 
     result.append(
         tuple_to_list(TemperatureHumidityDatum.query.filter_by(
                 ClassroomID=classroom_id).with_entities(
-                    TemperatureHumidityDatum.DateRecorded, TemperatureHumidityDatum.HumidityReading).order_by(
-                        TemperatureHumidityDatum.DateRecorded.asc()
-                    ).all(), True)
+                    TemperatureHumidityDatum.DateRecorded, TemperatureHumidityDatum.HumidityReading).all()
+        , True)
     )
 
     # Wind speed
     result.append(
         tuple_to_list(AnemometerDatum.query.filter_by(
                 ClassroomID=classroom_id).with_entities(
-                    AnemometerDatum.DateRecorded, AnemometerDatum.AnemometerReading).order_by(
-                        AnemometerDatum.DateRecorded.asc()
-                    ).all(), True)
+                    AnemometerDatum.DateRecorded, AnemometerDatum.AnemometerReading).all()
+        , True)
     )
 
     return result

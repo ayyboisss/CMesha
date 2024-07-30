@@ -27,7 +27,7 @@
                 <i class="fa-solid fa-droplet fa-2xl"></i>
                 <small class="icon-text">Humidity</small>
                 {% if i[2] %}
-                <div>{{((i[2])|string)[:-2]}}%</div>
+                <div>{{((i[2]*100)|string)[:-2]}}%</div>
                 {% else %}
                 <div>No Data</div>
                 {% endif %}
