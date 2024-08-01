@@ -2,12 +2,9 @@ main{
     padding: 0;
 }
 
-@media screen and (max-width: 729px) {
-
-}
-
 .chart-container{
     margin: auto;
+    margin-top: 1%;
     display: grid;
     grid-template-rows: 0.1fr 1fr 1fr;
     grid-template-columns: 1fr 1fr;
@@ -15,13 +12,10 @@ main{
         "title title"
         "temp humidity"
         "vent loud" ;
-    row-gap: 10px;
-    padding-bottom: 2%;
-
+    column-gap: 10px;
     & > *:not(.title){
-        border: 5px #adadad solid;
-        border-radius: 1rem;
-        background-color: #424242;
+        border: 4px #adadad solid;
+        background-color: #4d4949;
     }
 }
 
@@ -34,29 +28,41 @@ main{
         position: absolute;
         left: 50%;
         transform: translate(-50%, 0);
-        top: -1.5em;
+        top: -1.7em;
         z-index: 1;
         // General Style
-        background: #777777;
+        padding: 0rem 2rem;
+        font-size: 2rem;
+        background: #636363;
+        border: solid #9c80a8;
+        border-radius: 0;
+        font-weight: normal;
     }
 }
 
-#temp_chart{
+.temp_chart, .loud_chart, .humidity_chart, .vent_chart{
+    padding: 0.5rem;
+    border-radius: 1rem;
+}
+
+.temp_chart{
     grid-area: temp;
     margin: auto;
 }
 
-#loud_chart{
-    grid-area: loud;
+.loud_chart{
     margin: auto;
+    margin-top: 5%;
+    grid-area: loud;
 }
 
-#humidity_chart{
+.humidity_chart{
     grid-area: humidity;
     margin: auto;
 }
 
-#vent_chart{
-    grid-area: vent;
+.vent_chart{
     margin: auto;
+    margin-top: 5%;
+    grid-area: vent;
 }
