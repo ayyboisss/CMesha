@@ -1,8 +1,8 @@
-from database import app, Classroom, LoudnessData, TemperatureHumidityDatum, AnemometerDatum
+from database import app, Classroom, LoudnessData, TemperatureHumidityDatum, AnemometerDatum, db
 from flask import render_template
 
 
-def tuple_to_list(content, convert_date):
+def tuple_to_list(content=tuple, convert_date=bool):
     "Turn a SQLite query tuple into a list"
     result = []
     if convert_date:
@@ -17,7 +17,6 @@ def tuple_to_list(content, convert_date):
         for i in content:
             result.append([*i])
 
-    print(result)
     return result
 
 
@@ -82,36 +81,45 @@ def home():
         # Classroom ID, this is technically creating a table in python
         temp_list.append(i[0])
 
-        # Yep, we're doing this again
+        # Data queries: variable shows what's being queried
         temperature = TemperatureHumidityDatum.query.filter_by(
             ClassroomID=i[0]).with_entities(
-            TemperatureHumidityDatum.TemperatureReading).first()
+            TemperatureHumidityDatum.TemperatureReading).order_by(
+                TemperatureHumidityDatum.DateRecorded).first()
         if not temperature:
             temperature = (False,)
         temp_list.append(temperature[0])
 
         humidity = TemperatureHumidityDatum.query.filter_by(
             ClassroomID=i[0]).with_entities(
-            TemperatureHumidityDatum.HumidityReading).first()
+            TemperatureHumidityDatum.HumidityReading).order_by(
+                TemperatureHumidityDatum.DateRecorded).first()
         if not humidity:
             humidity = (False,)
         temp_list.append(humidity[0])
 
         loudness = LoudnessData.query.filter_by(
             ClassroomID=i[0]).with_entities(
-            LoudnessData.LoudnessReading).first()
+            LoudnessData.LoudnessReading).order_by(
+                LoudnessData.DateRecorded).first()
         if not loudness:
             loudness = (False,)
         temp_list.append(loudness[0])
 
         wind_speed = AnemometerDatum.query.filter_by(
             ClassroomID=i[0]).with_entities(
-            AnemometerDatum.AnemometerReading).first()
+            AnemometerDatum.AnemometerReading).order_by(
+                AnemometerDatum.DateRecorded).first()
         if not wind_speed:
             wind_speed = (False,)
         temp_list.append(wind_speed[0])
 
+        # This is for appending the latest date by searching through the entire database
+        latest_date = app.uni 
+
         giga_list.append(temp_list)
+
+
 
     print(giga_list)
     return (render_template("pages/main.html", giga_list=giga_list))
