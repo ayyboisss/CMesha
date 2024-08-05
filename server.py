@@ -1,5 +1,6 @@
 from database import app, Classroom, LoudnessData, TemperatureHumidityDatum, AnemometerDatum, db
 from flask import render_template
+from datetime import datetime
 
 
 def tuple_to_list(content=tuple, convert_date=bool):
@@ -77,7 +78,6 @@ def home():
 
     for i in classrooms:
         temp_list = []
-        print(i[0])
         # Classroom ID, this is technically creating a table in python
         temp_list.append(i[0])
 
@@ -115,13 +115,33 @@ def home():
         temp_list.append(wind_speed[0])
 
         # This is for appending the latest date by searching through the entire database
-        latest_date = app.uni 
+        # Selects the DateRecorded column in all relevant tables
+        wind_speed_date = db.select(AnemometerDatum.DateRecorded.label("DateRecorded")).where(
+                AnemometerDatum.ClassroomID == i[0])
+
+        loudness_date = db.select(LoudnessData.DateRecorded.label("DateRecorded")).where(
+                LoudnessData.ClassroomID == i[0])
+
+        temp_humid_date = db.select(TemperatureHumidityDatum.DateRecorded.label("DateRecorded")).where(
+                TemperatureHumidityDatum.ClassroomID == i[0])
+
+        # The UNION_ALL query
+        union_date = db.union(
+                wind_speed_date,
+                loudness_date,
+                temp_humid_date
+            ).order_by(db.text('DateRecorded'))
+
+        # Fixes some select issues in SQLAlchemy
+        combined_query = union_date.subquery()
+
+        union_result = db.select(combined_query).order_by(
+                combined_query.c.DateRecorded)
+
+        result = db.session.execute(union_result).fetchone()
+        temp_list.append(result[0].strftime("%m/%d/%Y"))
 
         giga_list.append(temp_list)
-
-
-
-    print(giga_list)
     return (render_template("pages/main.html", giga_list=giga_list))
 
 
