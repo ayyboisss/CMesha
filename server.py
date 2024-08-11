@@ -3,6 +3,11 @@ from flask import render_template
 from datetime import datetime as dt
 
 
+def get_classrooms():
+    with app.app_context():
+        result = Classroom.query.with_entities(Classroom.ClassroomID).all()
+    return result
+
 def tuple_to_list(content=tuple, convert_date=bool):
     "Turn a SQLite query tuple into a list"
     result = []
@@ -138,6 +143,8 @@ def home():
         union_result = db.select(combined_query).order_by(
                 combined_query.c.DateRecorded.desc())
 
+        # This converts the current format in the SQL database (YYYY-MM-DD)
+        # into the time used in the website (MM-DD-YY)
         result = db.session.execute(union_result).fetchone()
         datetime_convert = dt.strptime(str(result[0]), "%Y-%m-%d")
         temp_list.append(datetime_convert.strftime("%m/%d/%Y"))
@@ -160,6 +167,8 @@ def analytics(classroom_id):
                             ventilation=ventilation))
 
 
+
+
 @app.route("/staff")
 def staff():
     return (render_template("pages/staff.html"))
@@ -168,6 +177,11 @@ def staff():
 @app.route("/about")
 def about():
     return (render_template("pages/about.html"))
+
+
+app.jinja_env.globals.update({
+  'classrooms': get_classrooms()
+})
 
 
 if "__main__" == __name__:
