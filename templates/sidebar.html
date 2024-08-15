@@ -1,4 +1,4 @@
-<li> Classrooms </li>
+<li class="sidebar"> Classrooms </li>
 {% for classroom in classrooms %}
-<ul> > {{classroom[0]}} </ul>
+<ul class="sidebar-classroom"> <a href="/classroom/{{classroom[0]}}"> > {{classroom[0]}} </a> </ul>
 {% endfor %}
