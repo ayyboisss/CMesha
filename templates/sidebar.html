@@ -1,4 +1,6 @@
-<li class="sidebar"> Classrooms </li>
+<h3 id="classroom-header"> Classrooms </h3> 
+<ul class="sidebar"> 
 {% for classroom in classrooms %}
-<ul class="sidebar-classroom"> <a href="/classroom/{{classroom[0]}}"> > {{classroom[0]}} </a> </ul>
+    <li class="sidebar-classroom"> <a href="/classroom/{{classroom[0]}}"> {{classroom[0]}} </a> </li>
 {% endfor %}
+</ul>

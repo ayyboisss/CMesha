@@ -1,7 +1,24 @@
+#classroom-header{
+    text-align: center;
+    padding: 0;
+    margin: 5% 0;
+}
+
 .sidebar{
-    list-style: none;
+    margin: 0;
+    padding: 0;
+    overflow-y: auto;
+
+
 }
 
 .sidebar-classroom{
-
+    list-style: "|";
+    padding-left: 5%;
+    margin-left: 5%;
+    &:hover{
+        li::marker{
+            color: #F3D8FF;
+        }
+    }
 }

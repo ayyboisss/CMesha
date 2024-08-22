@@ -65,6 +65,27 @@ main {
   grid-area: vent;
 }
 
+#classroom-header {
+  text-align: center;
+  padding: 0;
+  margin: 5% 0;
+}
+
+.sidebar {
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
+}
+
+.sidebar-classroom {
+  list-style: "|";
+  padding-left: 5%;
+  margin-left: 5%;
+}
+.sidebar-classroom:hover li::marker {
+  color: #F3D8FF;
+}
+
 .icon::before {
   display: inline-block;
   text-rendering: auto;
@@ -77,6 +98,7 @@ main {
   --main-color: #636363;
   --main-color-darker: #303030;
   --border-color: white;
+  --link-color: #F3D8FF;
 }
 
 /* Deals with border box issues */
