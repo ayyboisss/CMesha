@@ -5,19 +5,25 @@
 }
 
 .sidebar{
+    border-left: solid #adadad 2px;
+}
+
+.classroom-list{
     margin: 0;
     padding: 0;
     overflow-y: auto;
-
-
 }
 
-.sidebar-classroom{
+.classroom-list-items{
     list-style: "|";
     padding-left: 5%;
     margin-left: 5%;
-    &:hover{
-        li::marker{
+    &::marker{
+        color: #F3D8FF;
+    }
+    & > a{
+        color: #a8c2a9;
+        &:hover{
             color: #F3D8FF;
         }
     }
