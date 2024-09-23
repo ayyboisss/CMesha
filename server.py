@@ -1,5 +1,6 @@
 from database import app, Classroom, LoudnessData, TemperatureHumidityDatum, AnemometerDatum, db
 from flask import render_template
+from werkzeug.exceptions import HTTPException 
 from datetime import datetime as dt
 
 
@@ -74,7 +75,6 @@ def kowalski_analyze(classroom_id=str):
 
 @app.route("/")
 def home():
-
     # This entire thing creates a list of all the data each classroom has.
     classrooms = Classroom.query.with_entities(
                     Classroom.ClassroomID).limit(6).all()
@@ -180,7 +180,23 @@ def staff():
 def about():
     return (render_template("pages/about.html"))
 
+# Universal error handler.
+@app.errorhandler(HTTPException)
+def error(error_code):
+    print(error_code)
+    default_response = "Something went wrong!"
+    default_code = 0
+    # Gets the error code from the werkzeug HTTPException.
+    match int(str(error_code).split()[0]):
+        case 404:
+            response = "This page cannot be found"
+            response_code = 404
+        case _:
+            response = default_response
+            response_code = default_code
+    return (render_template("pages/error.html", response=response, response_code=response_code))
 
+# This is for listing the classrooms in the sidebar.
 app.jinja_env.globals.update({
   'classrooms': get_classrooms()
 })

@@ -1,0 +1,23 @@
+.error-box{
+    /* Box */
+    display: flex;
+    flex-direction: column;
+    
+    border: solid 1px var(--edge-color);
+    background-color: var(--main-color);
+    border-radius: 4rem;
+
+    /* Text alignment */
+    padding: 4em;
+    margin-top: 10%;
+    margin-left: 35%;
+    margin-right: 35%;
+    text-align: center;
+    & > .error-code{
+        color: var(--link-color);
+        margin-bottom: 10px;
+    }
+    & > .response{
+        margin: 0;
+    }
+}

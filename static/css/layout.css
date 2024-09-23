@@ -15,7 +15,7 @@ main {
        column-gap: 10px;
 }
 .chart-container > *:not(.title) {
-  border: 4px #adadad solid;
+  border: 4px var(--edge-color) solid;
   background-color: #4d4949;
 }
 
@@ -72,7 +72,7 @@ main {
 }
 
 .sidebar {
-  border-left: solid #adadad 2px;
+  border-left: solid var(--edge-color) 2px;
 }
 
 .classroom-list {
@@ -101,6 +101,28 @@ footer {
   color: #b7ceb8;
 }
 
+.error-box {
+  /* Box */
+  display: flex;
+  flex-direction: column;
+  border: solid 1px var(--edge-color);
+  background-color: var(--main-color);
+  border-radius: 4rem;
+  /* Text alignment */
+  padding: 4em;
+  margin-top: 10%;
+  margin-left: 35%;
+  margin-right: 35%;
+  text-align: center;
+}
+.error-box > .error-code {
+  color: var(--link-color);
+  margin-bottom: 10px;
+}
+.error-box > .response {
+  margin: 0;
+}
+
 .icon::before {
   display: inline-block;
   text-rendering: auto;
@@ -114,6 +136,8 @@ footer {
   --main-color-darker: #303030;
   --border-color: white;
   --link-color: #F3D8FF;
+  --small-box-color: #f3d8ff0e;
+  --edge-color: #adadad;
 }
 
 /* Deals with border box issues */
@@ -155,13 +179,13 @@ header {
   grid-area: hd;
   box-sizing: border-box;
   padding-right: 2rem;
-  border-bottom: 2px #adadad solid;
+  border-bottom: 2px var(--edge-color) solid;
 }
 
 /* HEADER TAG */
 /* Adding some finesse for the header title */
 header > h1 {
-  color: #F3D8FF;
+  color: var(--link-color);
   margin: 0px;
   margin-left: 2rem;
   box-sizing: content-box;
@@ -174,7 +198,7 @@ header > h1 {
 }
 
 header > h1 .cap-c {
-  color: #C9E4CA;
+  color: var(--text-color);
 }
 
 header > h1 .dash {
@@ -187,7 +211,7 @@ nav {
   max-height: 2rem;
   min-height: 100%;
   height: 100%;
-  border-bottom: 2px #adadad solid;
+  border-bottom: 2px var(--edge-color) solid;
   /* flex box container */
 }
 nav ul {
@@ -217,7 +241,7 @@ nav ul li a {
 }
 nav ul li a:hover {
   color: rgb(241, 255, 243);
-  background-color: rgba(243, 216, 255, 0.3411764706);
+  background-color: var(--darker-link-color);
   box-sizing: border-box;
 }
 
@@ -267,7 +291,7 @@ main {
   /* text inside the title box*/
 }
 .classroom-grid-title:hover {
-  border: #F3D8FF solid;
+  border: var(--link-color) solid;
 }
 .classroom-grid-title div {
   position: relative;
@@ -313,6 +337,7 @@ main {
 }
 .classroom-grid-items ul li:not(.sound) {
   white-space: nowrap;
+  /* This color is specifically unique to one thing that never appears again */
   background-color: rgba(243, 216, 255, 0.0549019608);
   border-radius: 1rem;
 }
@@ -359,7 +384,7 @@ main {
 .classroom-grid-items ul .sound .sound-meter {
   padding-right: 0.5rem;
   font-size: 1.25rem;
-  color: #adadad;
+  color: var(--edge-color);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -369,7 +394,7 @@ main {
   flex-grow: 1;
 }
 .classroom-grid-items ul .sound .sound-meter i:hover {
-  color: #F3D8FF;
+  color: var(--link-color);
 }
 .classroom-grid-items ul .out-temp {
   grid-area: outTemp;

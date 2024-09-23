@@ -1,0 +1,10 @@
+{% extends 'layout.html' %}
+{% block content %}
+<div class="error-box">
+    <i class="fa-solid fa-triangle-exclamation fa-10x"></i>
+    {% if response_code != "0" %}
+    <h1 class="error-code"> {{response_code}} </h1>
+    {% endif %}
+    <h1 class="response"> {{response}} </h1> 
+</div>
+{% endblock %}

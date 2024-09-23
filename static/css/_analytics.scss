@@ -14,7 +14,7 @@ main{
         "vent loud" ;
     column-gap: 10px;
     & > *:not(.title){
-        border: 4px #adadad solid;
+        border: 4px var(--edge-color) solid;
         background-color: #4d4949;
     }
 }
