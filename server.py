@@ -79,7 +79,7 @@ def home():
     classrooms = Classroom.query.with_entities(
                     Classroom.ClassroomID).limit(6).all()
 
-    giga_list = []
+    complete_list = []
 
     for i in classrooms:
         temp_list = []
@@ -139,18 +139,20 @@ def home():
 
         # Fixes some select issues in SQLAlchemy
         combined_query = union_date.subquery()
-
+        print(str(combined_query) + " Chhecking")
+ 
         union_result = db.select(combined_query).order_by(
                 combined_query.c.DateRecorded.desc())
 
         # This converts the current format in the SQL database (YYYY-MM-DD)
         # into the time used in the website (MM-DD-YY)
         result = db.session.execute(union_result).fetchone()
+        print(str(result) + " CHECKING")
         datetime_convert = dt.strptime(str(result[0]), "%Y-%m-%d")
         temp_list.append(datetime_convert.strftime("%m/%d/%Y"))
 
-        giga_list.append(temp_list)
-    return (render_template("pages/main.html", giga_list=giga_list))
+        complete_list.append(temp_list)
+    return (render_template("pages/main.html", giga_list=complete_list))
 
 
 @app.route("/classroom/<string:classroom_id>")
