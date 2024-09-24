@@ -1,5 +1,5 @@
 from database import app, Classroom, LoudnessData, TemperatureHumidityDatum, AnemometerDatum, db
-from flask import render_template, abort
+from flask import render_template, abort, request
 from werkzeug.exceptions import HTTPException
 from datetime import datetime as dt
 
@@ -174,16 +174,22 @@ def analytics(classroom_id):
                             ventilation=ventilation))
 
 
-
-
 @app.route("/staff")
 def staff():
     return (render_template("pages/staff.html"))
 
 
-@app.route("/about")
 def about():
     return (render_template("pages/about.html"))
+
+
+@app.route("/posts", methods=['GET','POST'])
+def receiving_data():
+    data = request.data.decode('utf-8')
+    if data:
+        print(data)
+    return "Request Received!", 200
+
 
 # Universal error handler.
 @app.errorhandler(HTTPException)
@@ -208,4 +214,4 @@ app.jinja_env.globals.update({
 
 
 if "__main__" == __name__:
-    app.run(debug=True)
+    app.run(debug=True, host="0.0.0.0")
