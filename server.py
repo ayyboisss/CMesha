@@ -1,13 +1,16 @@
 from database import app, Classroom, LoudnessData, TemperatureHumidityDatum, AnemometerDatum, db
-from flask import render_template
-from werkzeug.exceptions import HTTPException 
+from flask import render_template, abort
+from werkzeug.exceptions import HTTPException
 from datetime import datetime as dt
 
 
 def get_classrooms():
+    class_list = []
     with app.app_context():
         result = Classroom.query.with_entities(Classroom.ClassroomID).all()
-    return result
+        for i in result:
+            class_list.append(i[0])
+    return class_list
 
 def tuple_to_list(content=tuple, convert_date=bool):
     "Turn a SQLite query tuple into a list"
@@ -119,8 +122,8 @@ def home():
             wind_speed = (False,)
         temp_list.append(wind_speed[0])
 
-        # This is for appending the latest date by searching through the entire database
-        # Selects the DateRecorded column in all relevant tables
+        # This is for appending the latest date by searching through the entire database.
+        # Selects the DateRecorded column in all relevant tables.
         wind_speed_date = db.select(AnemometerDatum.DateRecorded.label("DateRecorded")).where(
                 AnemometerDatum.ClassroomID == i[0])
 
@@ -157,6 +160,8 @@ def home():
 
 @app.route("/classroom/<string:classroom_id>")
 def analytics(classroom_id):
+    if classroom_id not in get_classrooms():
+        abort(404)
     data = kowalski_analyze(classroom_id)
     loudness = data[1]
     temperature = data[2]
