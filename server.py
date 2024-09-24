@@ -1,5 +1,5 @@
 from database import app, Classroom, LoudnessData, TemperatureHumidityDatum, AnemometerDatum, db
-from flask import render_template, abort, request
+from flask import render_template, abort, request, jsonify
 from werkzeug.exceptions import HTTPException
 from datetime import datetime as dt
 
@@ -183,12 +183,12 @@ def about():
     return (render_template("pages/about.html"))
 
 
-@app.route("/posts", methods=['GET','POST'])
+@app.route("/posts", methods=['POST'])
 def receiving_data():
-    data = request.data.decode('utf-8')
+    data = request.get_json()
     if data:
         print(data)
-    return "Request Received!", 200
+    return f"Signal received from sensor: {data['sensor']}, has value: {data['value']}", 200
 
 
 # Universal error handler.

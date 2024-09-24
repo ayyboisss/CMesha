@@ -1,6 +1,7 @@
 #include <Arduino.h>
 #include <WiFi.h>
 #include <HTTPClient.h>
+#include <ArduinoJson.h>
 
 // WiFi Config
 const char* ssid = "Smart Modem 2-C9L6T8DKJ";
@@ -27,11 +28,20 @@ void setup() {
 void loop() {
 if (WiFi.status() == WL_CONNECTED){
   HTTPClient http;
-  http.begin("http://192.168.1.120:5000/posts");
-  int httpResponseCode = http.POST("Testing this from ESP32...");
+
+  // Jason where's my information!??!
+  StaticJsonDocument<200> doc;
+  doc["sensor"] = "ESP32";
+  doc["value"] = 42;
+
+  String jsonString;
+  serializeJson(doc, jsonString);
+
+  http.begin("http://192.168.1.163:5000/posts");
+  http.addHeader("Content-Type", "application/json");
+  int httpResponseCode = http.POST(jsonString);
 
   if (httpResponseCode > 0){
-
     String response = http.getString();
 
     Serial.print("Response Code: ");
@@ -44,9 +54,12 @@ if (WiFi.status() == WL_CONNECTED){
     Serial.println("Something went wrong with the POST request: ");
     Serial.println(httpResponseCode);
   }
+  http.end();
 }
+
 else{
   Serial.println("There is no connection");
 }
+
 delay(5000);  
 }
