@@ -102,10 +102,11 @@ footer {
 }
 
 .error-box {
+  position: relative;
   /* Box */
   display: flex;
   flex-direction: column;
-  border: solid 1px var(--edge-color);
+  border: solid 2px var(--edge-color);
   background-color: var(--main-color);
   border-radius: 4rem;
   /* Text alignment */
@@ -123,6 +124,36 @@ footer {
   margin: 0;
 }
 
+.return-button {
+  /* Text related properties */
+  text-align: center;
+  color: #C9E4CA;
+  box-sizing: border-box;
+  /* Title box properties */
+  border: #9c80a8 solid;
+  height: 2em;
+  width: 50%;
+  background-color: var(--main-color);
+  /* Positioning */
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 0);
+  top: -1em;
+  z-index: 1;
+  /* text inside the title box*/
+}
+.return-button:hover {
+  border: var(--link-color) solid;
+}
+.return-button .home-t {
+  position: relative;
+  box-sizing: content-box;
+  height: 100%;
+  text-align: center;
+  line-height: 150%;
+  overflow: hidden;
+}
+
 .icon::before {
   display: inline-block;
   text-rendering: auto;
@@ -138,6 +169,7 @@ footer {
   --link-color: #F3D8FF;
   --small-box-color: #f3d8ff0e;
   --edge-color: #adadad;
+  --react-color: #a195a7;
 }
 
 /* Deals with border box issues */
@@ -227,7 +259,7 @@ nav ul li {
   list-style-type: none;
   /* and finally, the links*/
 }
-nav ul li a {
+nav ul li .nav-buttons {
   color: var(--text-color);
   /* These 2 things allow the anchor to be bigger */
   display: inline-block;
@@ -239,9 +271,9 @@ nav ul li a {
   text-align: center;
   line-height: 3rem;
 }
-nav ul li a:hover {
+nav ul li .nav-buttons:hover {
   color: rgb(241, 255, 243);
-  background-color: var(--darker-link-color);
+  background-color: var(--react-color);
   box-sizing: border-box;
 }
 
