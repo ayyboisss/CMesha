@@ -1,0 +1,4 @@
+To run the website, run server.py.
+To run the sensor, upload the code in:
+    arduino/Wireless Connector/src/main.cpp
+in an ESP32 
