@@ -1,0 +1,23 @@
+
+{% extends 'layout.html' %}
+{% block content %}
+<form method="POST">
+    {{ register_form.hidden_tag() }}
+    <h3>
+        <div> Username </div> 
+        {{ register_form.username }}
+        <div> Password </div>
+        {{ register_form.password }}
+        <div> Repeat the password </div>
+        {{ register_form.password_repeat }}
+    </h3>
+    <input type="submit" value="Register">
+</form>
+
+<small><a href="{{url_for('login')}}">Have an account? Login</a></small>
+{% if get_flashed_messages() %}
+    {% for message in get_flashed_messages() %}
+        {{message}}
+    {% endfor %}
+{% endif %}
+{% endblock %}

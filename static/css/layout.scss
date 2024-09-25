@@ -110,13 +110,13 @@ nav{
         flex-wrap: nowrap;
         margin: 0px;
         padding: 0px;
+        padding-right: 1%;
         height: 100%;
         width: 100%;
 
         /* flex children lmfao */
         li{
             list-style-type: none;
-
 
             /* and finally, the links*/
             .nav-buttons{
@@ -137,6 +137,14 @@ nav{
                     box-sizing: border-box;
                 }
             }
+        }
+
+        #nav-seperator{
+            flex-grow: 1;
+        }
+
+        #username{
+            line-height: 3;
         }
     }
 }

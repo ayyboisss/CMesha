@@ -1,0 +1,19 @@
+{% extends 'layout.html' %}
+{% block content %}
+<form class = 'login' method="POST">
+    {{ login_form.hidden_tag() }}
+    <h3>
+        <div> Username </div> 
+        {{ login_form.username }}
+        <div> Password </div>
+        {{ login_form.password }}
+    </h3>
+    <input type="submit" value="Login">
+</form>
+{% if get_flashed_messages() %}
+    {% for message in get_flashed_messages() %}
+        <small class="login-warning">{{message}}</small>
+    {% endfor %}
+{% endif %}
+
+{% endblock %}

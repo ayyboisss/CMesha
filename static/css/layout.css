@@ -251,6 +251,7 @@ nav ul {
   flex-wrap: nowrap;
   margin: 0px;
   padding: 0px;
+  padding-right: 1%;
   height: 100%;
   width: 100%;
   /* flex children lmfao */
@@ -275,6 +276,12 @@ nav ul li .nav-buttons:hover {
   color: rgb(241, 255, 243);
   background-color: var(--react-color);
   box-sizing: border-box;
+}
+nav ul #nav-seperator {
+  flex-grow: 1;
+}
+nav ul #username {
+  line-height: 3;
 }
 
 /* MAIN TAG */

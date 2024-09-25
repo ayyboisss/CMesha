@@ -2,4 +2,11 @@
     <li><a href="/" class="nav-buttons">Home</a></li>
     <li><a href="" class="nav-buttons">Staff</a></li>
     <li><a href="/about" class="nav-buttons">About</a></li>
+    <li id="nav-seperator"> </li>
+    {% if current_user.username %}
+    <li id="username"> Logged in as {{ current_user.username }} </li>
+    {% else %}
+    <li><a href="/login" class="login-button nav-buttons"> Login </a></li>
+    <li><a href="/register" class="register-button nav-buttons"> Register </a></li>
+    {% endif %}
 </ul>

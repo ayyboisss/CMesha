@@ -1,11 +1,12 @@
-from modules.database import app, Classroom, LoudnessData, TemperatureHumidityDatum, AnemometerDatum, db
-from flask import render_template, abort, request
+from database import app, Classroom, LoudnessData, TemperatureHumidityDatum, AnemometerDatum, db
+from database import Users as DB_Users # In hindsight, this could've been named something elsaaaa
+from flask import render_template, abort, request, redirect, url_for, flash
 from werkzeug.exceptions import HTTPException
 from datetime import datetime as dt
 from flask_wtf.csrf import CSRFProtect
 from flask_login import LoginManager, UserMixin, login_required, login_user, logout_user, current_user
-from modules.user_forms import LoginForm, RegisterForm
-
+from werkzeug.security import check_password_hash, generate_password_hash
+from user_forms import LoginForm, RegisterForm
 
 # Flask Add-ons
 login_manager = LoginManager()
@@ -103,7 +104,75 @@ def kowalski_analyze(classroom_id=str):
     return result
 
 
+# Login Manager
+# This is for loading the user properly into the website
+@login_manager.user_loader
+def user_loader(user_id):
+    query_user = DB_Users.query.filter_by(
+                    ID=user_id).with_entities(
+                        DB_Users.ID, DB_Users.User, DB_Users.UserPassword).first()
+    if query_user:
+        return User(int(query_user[0]), query_user[1], query_user[2])
+    else:
+        return None
+
+
+@login_manager.unauthorized_handler
+def kick_user():
+    return redirect(url_for('login'))
+
+
+# Routes
+@app.route("/login", methods=['POST', 'GET'])
+def login():
+    login_form = LoginForm()
+    if login_form.validate_on_submit():
+        username = login_form.username.data
+        password = login_form.password.data
+        database_users = DB_Users.query.filter_by(
+            User=username).with_entities(
+                DB_Users.ID, DB_Users.UserPassword).first()
+        if database_users:
+            current_user = user_loader(database_users[0])
+            if check_password_hash(database_users[1], password):
+                login_user(current_user)
+                return redirect(url_for('home'))
+            else:
+                flash("Wrong Password")
+        else:
+            flash("This user does not exist")
+    return render_template("pages/login.html", login_form=login_form)
+
+
+@app.route("/register", methods=['POST', 'GET'])
+def register():
+    register_form = RegisterForm()
+    if register_form.validate_on_submit():
+        username = register_form.username.data
+        password = register_form.password.data
+        password_repeat = register_form.password_repeat.data
+        existing_users = DB_Users.query.filter_by(
+                            User=username).with_entities(
+                                DB_Users.User).first()
+        print(existing_users)
+        if password_repeat == password:
+            print(password)
+            print(password_repeat)
+            if existing_users:
+                flash("This username has already been taken")
+            else:
+
+                flash("Inserting")
+                insert_query = DB_Users(User=username, UserPassword=generate_password_hash(password))
+                db.session.add(insert_query)
+                db.session.commit()
+                flash("Registered!")
+        else:
+            flash("The passwords do not match")
+    return render_template('pages/register.html', register_form=register_form)
+
 @app.route("/")
+@login_required
 def home():
     # This entire thing creates a list of all the data each classroom has.
     classrooms = Classroom.query.with_entities(
@@ -240,5 +309,6 @@ app.jinja_env.globals.update({
 
 
 if "__main__" == __name__:
+    # csrf.init_app(app)
     app.run(debug=True, host="0.0.0.0")
-    csrf.init_app(app)
+
