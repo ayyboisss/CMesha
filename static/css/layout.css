@@ -110,10 +110,12 @@ footer {
   background-color: var(--main-color);
   border-radius: 4rem;
   /* Text alignment */
-  padding: 4em;
+  padding: 1rem;
+  max-width: -moz-fit-content;
+  max-width: fit-content;
   margin-top: 10%;
-  margin-left: 35%;
-  margin-right: 35%;
+  margin-left: auto;
+  margin-right: auto;
   text-align: center;
 }
 .error-box > .error-code {
@@ -152,6 +154,61 @@ footer {
   text-align: center;
   line-height: 150%;
   overflow: hidden;
+}
+
+.text-field {
+  font-family: "Nunito";
+  background-color: transparent;
+  color: var(--link-color);
+  width: 100%;
+  font-size: 1.5rem;
+  border: solid 2px rgba(173, 173, 173, 0.4941176471);
+  border-radius: 0.5em;
+  padding-left: 5px;
+  outline: none;
+}
+.text-field:focus {
+  box-shadow: none;
+  border-style: solid;
+  border-color: white;
+}
+
+.login,
+.register {
+  position: relative;
+  /* Box */
+  display: flex;
+  flex-direction: column;
+  border: solid 2px var(--edge-color);
+  background-color: var(--main-color);
+  border-radius: 4rem;
+  /* Text alignment */
+  max-width: -moz-fit-content;
+  max-width: fit-content;
+  margin: auto;
+  margin-top: 5%;
+}
+.login > h3,
+.register > h3 {
+  position: relative;
+  min-width: -moz-fit-content;
+  min-width: fit-content;
+  min-height: -moz-fit-content;
+  min-height: fit-content;
+  margin: 0;
+  padding: 4em;
+}
+.login > h3 > div:not(:first-child),
+.register > h3 > div:not(:first-child) {
+  padding-top: 20px;
+}
+.login > h3 > #submit,
+.register > h3 > #submit {
+  position: absolute;
+  text-align: center;
+  left: 45%;
+  z-index: 1;
+  bottom: 10%;
 }
 
 .icon::before {

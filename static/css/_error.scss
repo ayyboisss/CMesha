@@ -9,10 +9,11 @@
     border-radius: 4rem;
 
     /* Text alignment */
-    padding: 4em;
+    padding: 1rem;
+    max-width: fit-content;
     margin-top: 10%;
-    margin-left: 35%;
-    margin-right: 35%;
+    margin-left: auto;
+    margin-right: auto;
     text-align: center;
     & > .error-code{
         color: var(--link-color);

@@ -172,7 +172,6 @@ def register():
     return render_template('pages/register.html', register_form=register_form)
 
 @app.route("/")
-@login_required
 def home():
     # This entire thing creates a list of all the data each classroom has.
     classrooms = Classroom.query.with_entities(

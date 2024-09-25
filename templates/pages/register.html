@@ -5,13 +5,14 @@
     {{ register_form.hidden_tag() }}
     <h3>
         <div> Username </div> 
-        {{ register_form.username }}
+        {{ register_form.username(class="text-field") }}
         <div> Password </div>
-        {{ register_form.password }}
+        {{ register_form.password(class="text-field") }}
         <div> Repeat the password </div>
-        {{ register_form.password_repeat }}
+        {{ register_form.password_repeat(class="text-field") }}
+        <input id="submit" type="submit" value="Register">
     </h3>
-    <input type="submit" value="Register">
+
 </form>
 
 <small><a href="{{url_for('login')}}">Have an account? Login</a></small>

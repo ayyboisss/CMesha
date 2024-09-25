@@ -4,7 +4,8 @@
     <li><a href="/about" class="nav-buttons">About</a></li>
     <li id="nav-seperator"> </li>
     {% if current_user.username %}
-    <li id="username"> Logged in as {{ current_user.username }} </li>
+    <li id="logout"><a href="/logout" class="nav-buttons"><small>Logout</small></a> </li>
+    <li id="username"> Logged in as <span style="color:#F3D8FF;" >{{ current_user.username }}</span> </li>
     {% else %}
     <li><a href="/login" class="login-button nav-buttons"> Login </a></li>
     <li><a href="/register" class="register-button nav-buttons"> Register </a></li>

@@ -4,11 +4,12 @@
     {{ login_form.hidden_tag() }}
     <h3>
         <div> Username </div> 
-        {{ login_form.username }}
+        {{ login_form.username(class="text-field") }}
         <div> Password </div>
-        {{ login_form.password }}
+        {{ login_form.password(class="text-field") }}
+        <input id="submit" type="submit" value="Login">
     </h3>
-    <input type="submit" value="Login">
+
 </form>
 {% if get_flashed_messages() %}
     {% for message in get_flashed_messages() %}
