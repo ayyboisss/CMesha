@@ -1,7 +1,33 @@
-from database import app, Classroom, LoudnessData, TemperatureHumidityDatum, AnemometerDatum, db
-from flask import render_template, abort, request, jsonify
+from modules.database import app, Classroom, LoudnessData, TemperatureHumidityDatum, AnemometerDatum, db
+from flask import render_template, abort, request
 from werkzeug.exceptions import HTTPException
 from datetime import datetime as dt
+from flask_wtf.csrf import CSRFProtect
+from flask_login import LoginManager, UserMixin, login_required, login_user, logout_user, current_user
+from modules.user_forms import LoginForm, RegisterForm
+
+
+# Flask Add-ons
+login_manager = LoginManager()
+login_manager.init_app(app)
+csrf = CSRFProtect(app)
+
+class User(UserMixin):
+    def __init__(self, id, username, password):
+        self.id = str(id)
+        self.username = username
+        self.password = password
+    
+    def is_active(self):
+        return self.is_active()
+    def is_anonymous(self):
+        return False
+    def is_authenticated(self):
+        return True
+    def get_id(self):
+        return self.id
+    def get_name(self):
+        return self.username
 
 
 def get_classrooms():
@@ -11,6 +37,7 @@ def get_classrooms():
         for i in result:
             class_list.append(i[0])
     return class_list
+
 
 def tuple_to_list(content=tuple, convert_date=bool):
     "Turn a SQLite query tuple into a list"
@@ -142,15 +169,13 @@ def home():
 
         # Fixes some select issues in SQLAlchemy
         combined_query = union_date.subquery()
-        print(str(combined_query) + " Chhecking")
- 
+
         union_result = db.select(combined_query).order_by(
                 combined_query.c.DateRecorded.desc())
 
         # This converts the current format in the SQL database (YYYY-MM-DD)
         # into the time used in the website (MM-DD-YY)
         result = db.session.execute(union_result).fetchone()
-        print(str(result) + " CHECKING")
         datetime_convert = dt.strptime(str(result[0]), "%Y-%m-%d")
         temp_list.append(datetime_convert.strftime("%m/%d/%Y"))
 
@@ -207,6 +232,7 @@ def error(error_code):
             response_code = default_code
     return (render_template("pages/error.html", response=response, response_code=response_code))
 
+
 # This is for listing the classrooms in the sidebar.
 app.jinja_env.globals.update({
   'classrooms': get_classrooms()
@@ -215,3 +241,4 @@ app.jinja_env.globals.update({
 
 if "__main__" == __name__:
     app.run(debug=True, host="0.0.0.0")
+    csrf.init_app(app)
