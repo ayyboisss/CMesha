@@ -3,18 +3,20 @@
 <form class = 'login' method="POST">
     {{ login_form.hidden_tag() }}
     <h3>
+        <div id="form-title" class="classroom-grid-title"> Login </div>
         <div> Username </div> 
         {{ login_form.username(class="text-field") }}
         <div> Password </div>
         {{ login_form.password(class="text-field") }}
         <input id="submit" type="submit" value="Login">
+        {% if get_flashed_messages() %}
+            {% for message in get_flashed_messages() %}
+                <small class="user-warning">{{message}}</small>
+            {% endfor %}
+        {% endif %}
     </h3>
 
 </form>
-{% if get_flashed_messages() %}
-    {% for message in get_flashed_messages() %}
-        <small class="login-warning">{{message}}</small>
-    {% endfor %}
-{% endif %}
+
 
 {% endblock %}

@@ -6,7 +6,7 @@
     
     border: solid 2px var(--edge-color);
     background-color: var(--main-color);
-    border-radius: 4rem;
+    border-radius: 2rem;
 
     /* Text alignment */
     padding: 1rem;
@@ -21,41 +21,5 @@
     }
     & > .response{
         margin: 0;
-    }
-}
-
-// I had to copy this from layout.scss as for some reason I can't use @extend on classes outside the file.
-// SCSS, please fix. 
-
-.return-button{
-    /* Text related properties */
-    text-align: center;
-    color: #C9E4CA;
-    box-sizing: border-box;
-
-    /* Title box properties */
-    border: #9c80a8 solid;
-    height: 2em;
-    width: 50%;
-    background-color: var(--main-color);
-
-    /* Positioning */
-    position: absolute;
-    left: 50%;
-    transform: translate(-50%, 0);
-    top: -1em;
-    z-index: 1;
-    
-    &:hover{
-        border: var(--link-color) solid;
-    }
-    /* text inside the title box*/
-    .home-t{
-        position: relative;
-        box-sizing: content-box;
-        height: 100%;
-        text-align: center;
-        line-height: 150%;
-        overflow: hidden;
     }
 }

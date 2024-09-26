@@ -1,9 +1,10 @@
 
 {% extends 'layout.html' %}
 {% block content %}
-<form method="POST">
+<form class="register" method="POST">
     {{ register_form.hidden_tag() }}
     <h3>
+        <div id="form-title" class="classroom-grid-title"> Register </div>
         <div> Username </div> 
         {{ register_form.username(class="text-field") }}
         <div> Password </div>
@@ -11,14 +12,12 @@
         <div> Repeat the password </div>
         {{ register_form.password_repeat(class="text-field") }}
         <input id="submit" type="submit" value="Register">
+        {% if get_flashed_messages() %}
+            {% for message in get_flashed_messages() %}
+                <small class="user-warning">{{message}}</small>
+            {% endfor %}
+        {% endif %}
     </h3>
 
 </form>
-
-<small><a href="{{url_for('login')}}">Have an account? Login</a></small>
-{% if get_flashed_messages() %}
-    {% for message in get_flashed_messages() %}
-        {{message}}
-    {% endfor %}
-{% endif %}
 {% endblock %}

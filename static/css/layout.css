@@ -69,6 +69,7 @@ main {
   text-align: center;
   padding: 0;
   margin: 5% 0;
+  font-weight: normal;
 }
 
 .sidebar {
@@ -79,6 +80,7 @@ main {
   margin: 0;
   padding: 0;
   overflow-y: auto;
+  border-top: solid 1px var(--edge-color);
 }
 
 .classroom-list-items {
@@ -108,9 +110,10 @@ footer {
   flex-direction: column;
   border: solid 2px var(--edge-color);
   background-color: var(--main-color);
-  border-radius: 4rem;
+  border-radius: 2rem;
   /* Text alignment */
   padding: 1rem;
+  max-width: -webkit-fit-content;
   max-width: -moz-fit-content;
   max-width: fit-content;
   margin-top: 10%;
@@ -124,36 +127,6 @@ footer {
 }
 .error-box > .response {
   margin: 0;
-}
-
-.return-button {
-  /* Text related properties */
-  text-align: center;
-  color: #C9E4CA;
-  box-sizing: border-box;
-  /* Title box properties */
-  border: #9c80a8 solid;
-  height: 2em;
-  width: 50%;
-  background-color: var(--main-color);
-  /* Positioning */
-  position: absolute;
-  left: 50%;
-  transform: translate(-50%, 0);
-  top: -1em;
-  z-index: 1;
-  /* text inside the title box*/
-}
-.return-button:hover {
-  border: var(--link-color) solid;
-}
-.return-button .home-t {
-  position: relative;
-  box-sizing: content-box;
-  height: 100%;
-  text-align: center;
-  line-height: 150%;
-  overflow: hidden;
 }
 
 .text-field {
@@ -170,7 +143,14 @@ footer {
 .text-field:focus {
   box-shadow: none;
   border-style: solid;
-  border-color: white;
+  border-color: var(--edge-color);
+}
+
+#form-title {
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  border: solid 2px #ceb6d8;
 }
 
 .login,
@@ -181,8 +161,9 @@ footer {
   flex-direction: column;
   border: solid 2px var(--edge-color);
   background-color: var(--main-color);
-  border-radius: 4rem;
+  border-radius: 2rem;
   /* Text alignment */
+  max-width: -webkit-fit-content;
   max-width: -moz-fit-content;
   max-width: fit-content;
   margin: auto;
@@ -190,25 +171,38 @@ footer {
 }
 .login > h3,
 .register > h3 {
+  font-weight: lighter;
   position: relative;
-  min-width: -moz-fit-content;
-  min-width: fit-content;
-  min-height: -moz-fit-content;
-  min-height: fit-content;
   margin: 0;
-  padding: 4em;
+  padding: 4rem;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
 }
 .login > h3 > div:not(:first-child),
 .register > h3 > div:not(:first-child) {
   padding-top: 20px;
 }
-.login > h3 > #submit,
-.register > h3 > #submit {
-  position: absolute;
-  text-align: center;
-  left: 45%;
-  z-index: 1;
-  bottom: 10%;
+
+/* <small> was an inline element the entire time?!?! */
+.user-warning {
+  display: block;
+}
+
+#submit {
+  display: block;
+  margin: auto;
+  width: 50%;
+  margin-top: 1rem;
+  background-color: transparent;
+  color: var(--link-color);
+  outline: none;
+  border: 2px solid var(--edge-color);
+  border-radius: 2rem;
+  padding: 0.5rem;
+}
+#submit:hover {
+  border-color: var(--link-color);
+  color: var(--link-color);
 }
 
 .icon::before {
@@ -375,7 +369,9 @@ main {
   box-sizing: border-box;
   /* Title box properties */
   border: #9c80a8 solid;
-  height: 2em;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
   width: 50%;
   background-color: var(--main-color);
   /* Positioning */
@@ -394,7 +390,6 @@ main {
   box-sizing: content-box;
   height: 100%;
   text-align: center;
-  line-height: 150%;
   overflow: hidden;
 }
 
