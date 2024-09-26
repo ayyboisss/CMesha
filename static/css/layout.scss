@@ -190,7 +190,7 @@ main{
 
     /* Title box properties */
     border: #9c80a8 solid;
-    height: 2em;
+    height: fit-content;
     width: 50%;
     background-color: var(--main-color);
 
@@ -210,7 +210,6 @@ main{
         box-sizing: content-box;
         height: 100%;
         text-align: center;
-        line-height: 150%;
         overflow: hidden;
     }
 }

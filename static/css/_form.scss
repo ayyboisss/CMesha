@@ -12,9 +12,13 @@
     &:focus {
         box-shadow: none;
         border-style: solid;
-        border-color: white;
+        border-color: var(--edge-color);
     }
+}
 
+#form-title{
+    height: fit-content;
+    border:solid 2px #ceb6d8;
 }
 
 .login,
@@ -26,7 +30,7 @@
 
     border: solid 2px var(--edge-color);
     background-color: var(--main-color);
-    border-radius: 4rem;
+    border-radius: 2rem;
 
     /* Text alignment */
     max-width: fit-content;
@@ -34,25 +38,39 @@
     margin-top: 5%;
 
     &>h3 {
+        font-weight: lighter;
         position: relative;
-        min-width: fit-content;
-        min-height: fit-content;
         margin: 0;
-        padding: 4em;
+        padding: 4rem;
+        padding-top: 2rem;
+        padding-bottom: 2rem;
 
         & > div:not(:first-child){
             padding-top: 20px;
         }
-        & > #submit{
-            position: absolute;
-            text-align: center;
-            left: 45%;
-            z-index: 1;
-            bottom: 10%;
-        }
     }
+}
+
+/* <small> was an inline element the entire time?!?! */
+.user-warning{
+    display: block;
+}
 
 
+#submit{
+    display: block;
+    margin: auto;
+    width: 50%;
+    margin-top: 1rem;
+    background-color: transparent;
+    color: var(--link-color);
+    outline: none;
+    border: 2px solid var(--edge-color);
+    border-radius: 2rem;
+    padding: 0.5rem;
 
-
+    &:hover{
+        border-color: var(--link-color);
+        color: var(--link-color);
+    }
 }

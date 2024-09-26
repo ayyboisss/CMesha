@@ -2,6 +2,7 @@
     text-align: center;
     padding: 0;
     margin: 5% 0;
+    font-weight: normal;
 }
 
 .sidebar{
@@ -12,6 +13,7 @@
     margin: 0;
     padding: 0;
     overflow-y: auto;
+    border-top: solid 1px var(--edge-color);
 }
 
 .classroom-list-items{
