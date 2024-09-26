@@ -4,29 +4,35 @@ from flask import render_template, abort, request, redirect, url_for, flash
 from werkzeug.exceptions import HTTPException
 from datetime import datetime as dt
 from flask_wtf.csrf import CSRFProtect
-from flask_login import LoginManager, UserMixin, login_required, login_user, logout_user, current_user
+from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required
 from werkzeug.security import check_password_hash, generate_password_hash
 from user_forms import LoginForm, RegisterForm
+
 
 # Flask Add-ons
 login_manager = LoginManager()
 login_manager.init_app(app)
 csrf = CSRFProtect(app)
 
+
 class User(UserMixin):
     def __init__(self, id, username, password):
         self.id = str(id)
         self.username = username
         self.password = password
-    
+
     def is_active(self):
         return self.is_active()
+
     def is_anonymous(self):
         return False
+
     def is_authenticated(self):
         return True
+
     def get_id(self):
         return self.id
+
     def get_name(self):
         return self.username
 
@@ -120,6 +126,12 @@ def user_loader(user_id):
 @login_manager.unauthorized_handler
 def kick_user():
     return redirect(url_for('login'))
+
+
+@app.route("/logout", methods=['POST', 'GET'])
+@login_required
+def logout():
+    
 
 
 # Routes
@@ -310,4 +322,3 @@ app.jinja_env.globals.update({
 if "__main__" == __name__:
     # csrf.init_app(app)
     app.run(debug=True, host="0.0.0.0")
-
