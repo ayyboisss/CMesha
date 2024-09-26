@@ -22,3 +22,8 @@ class RegisterForm(FlaskForm):
     password_repeat = PasswordField(validators=[
         InputRequired(message="You must put the same password again")
     ])
+
+class LogoutForm(FlaskForm):
+    user_logout = RadioField('logout',
+                             choices=[(True, 'Yes'), (False, 'Return to homepage')],
+                             validators=[InputRequired("Please choose.")])
