@@ -4,8 +4,8 @@
 #include <ArduinoJson.h>
 
 // WiFi Config
-const char* ssid = "Smart Modem 2-C9L6T8DKJ";
-const char* password = "S28BrightJellyfish$";
+const char* ssid = "BHS_MC";
+const char* password = "22610esp32";
 void setup() {
   Serial.begin(9600);
   delay(2000);
@@ -31,13 +31,15 @@ if (WiFi.status() == WL_CONNECTED){
 
   // Jason where's my information!??!
   StaticJsonDocument<200> doc;
-  doc["sensor"] = "ESP32";
-  doc["value"] = 42;
+  doc["temperature"] = 23;
+  doc["humidity"] = 0.12;
+  doc["loudness"] = 47;
+  doc["air_quality"] = 250;
 
   String jsonString;
   serializeJson(doc, jsonString);
 
-  http.begin("http://192.168.1.163:5000/posts");
+  http.begin("http://10.1.34.83:5000/posts");
   http.addHeader("Content-Type", "application/json");
   int httpResponseCode = http.POST(jsonString);
 
