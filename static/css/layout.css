@@ -113,7 +113,6 @@ footer {
   border-radius: 2rem;
   /* Text alignment */
   padding: 1rem;
-  max-width: -webkit-fit-content;
   max-width: -moz-fit-content;
   max-width: fit-content;
   margin-top: 10%;
@@ -129,9 +128,10 @@ footer {
   margin: 0;
 }
 
+/* Only used by Logout and Login */
 .text-field {
   font-family: "Nunito";
-  background-color: transparent;
+  background-color: rgba(0, 0, 0, 0.1176470588);
   color: var(--link-color);
   width: 100%;
   font-size: 1.5rem;
@@ -143,34 +143,61 @@ footer {
 .text-field:focus {
   box-shadow: none;
   border-style: solid;
-  border-color: var(--edge-color);
+  background-color: rgba(0, 0, 0, 0.2470588235);
 }
 
 #form-title {
-  height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
   border: solid 2px #ceb6d8;
 }
 
+.logout-field {
+  list-style: none;
+  padding: 0;
+  /* Can't add tags directly to the input field */
+}
+.logout-field > li {
+  display: block;
+}
+.logout-field > li > input {
+  opacity: 0%;
+}
+.logout-field > li > input:hover ~ label {
+  outline: 1px solid rgba(206, 182, 216, 0.4235294118);
+  cursor: pointer;
+}
+.logout-field > li > input:checked ~ label {
+  background-color: rgba(242, 213, 255, 0.062745098);
+  outline: 1px solid var(--link-color);
+}
+.logout-field > li > label {
+  display: block;
+  margin-top: -1rem;
+  padding-right: 10px;
+  padding-left: 10px;
+}
+
+/* Containers for all 3 "user forms" */
 .login,
-.register {
+.register,
+.logout {
   position: relative;
   /* Box */
   display: flex;
   flex-direction: column;
   border: solid 2px var(--edge-color);
   background-color: var(--main-color);
-  border-radius: 2rem;
+  border-radius: 1.5rem;
   /* Text alignment */
-  max-width: -webkit-fit-content;
   max-width: -moz-fit-content;
   max-width: fit-content;
   margin: auto;
   margin-top: 5%;
 }
 .login > h3,
-.register > h3 {
+.register > h3,
+.logout > h3 {
   font-weight: lighter;
   position: relative;
   margin: 0;
@@ -179,13 +206,16 @@ footer {
   padding-bottom: 2rem;
 }
 .login > h3 > div:not(:first-child),
-.register > h3 > div:not(:first-child) {
+.register > h3 > div:not(:first-child),
+.logout > h3 > div:not(:first-child) {
   padding-top: 20px;
 }
 
 /* <small> was an inline element the entire time?!?! */
 .user-warning {
+  color: #f3d6ff;
   display: block;
+  margin-top: 5px;
 }
 
 #submit {
@@ -197,10 +227,11 @@ footer {
   color: var(--link-color);
   outline: none;
   border: 2px solid var(--edge-color);
-  border-radius: 2rem;
+  border-radius: 1rem;
   padding: 0.5rem;
 }
 #submit:hover {
+  cursor: pointer;
   border-color: var(--link-color);
   color: var(--link-color);
 }
@@ -369,7 +400,6 @@ main {
   box-sizing: border-box;
   /* Title box properties */
   border: #9c80a8 solid;
-  height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
   width: 50%;

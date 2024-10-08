@@ -8,12 +8,12 @@
         {{ login_form.username(class="text-field") }}
         <div> Password </div>
         {{ login_form.password(class="text-field") }}
-        <input id="submit" type="submit" value="Login">
         {% if get_flashed_messages() %}
             {% for message in get_flashed_messages() %}
                 <small class="user-warning">{{message}}</small>
             {% endfor %}
         {% endif %}
+        <input id="submit" type="submit" value="Login">
     </h3>
 
 </form>

@@ -1,0 +1,19 @@
+{% extends 'layout.html' %}
+{% block content %}
+<form class = 'logout' method="POST">
+    {{ logout_form.hidden_tag() }}
+    <h3>
+        <div id="form-title" class="classroom-grid-title"> Logout </div>
+        {{ logout_form.user_logout(class="logout-field") }}
+        <input id="submit" type="submit" value="Confirm">
+        {% if get_flashed_messages() %}
+            {% for message in get_flashed_messages() %}
+                <small class="user-warning">{{message}}</small>
+            {% endfor %}
+        {% endif %}
+    </h3>
+
+</form>
+
+
+{% endblock %}

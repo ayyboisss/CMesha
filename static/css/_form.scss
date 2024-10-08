@@ -1,6 +1,7 @@
+/* Only used by Logout and Login */
 .text-field {
     font-family: "Nunito";
-    background-color: transparent;
+    background-color: #0000001e;
     color: var(--link-color);
     width: 100%;
     font-size: 1.5rem;
@@ -12,7 +13,7 @@
     &:focus {
         box-shadow: none;
         border-style: solid;
-        border-color: var(--edge-color);
+        background-color: #0000003f;
     }
 }
 
@@ -21,8 +22,43 @@
     border:solid 2px #ceb6d8;
 }
 
+.logout-field{
+    list-style: none;
+    padding: 0;
+    
+    & > li{
+        display: block;
+    }
+
+    /* Can't add tags directly to the input field */
+    & > li > input{
+        opacity: 0%;
+
+        &:hover ~ label{
+            outline: 1px solid #ceb6d86c;
+            cursor: pointer;
+        }
+
+        &:checked ~ label{
+            background-color: #f2d5ff10;
+            outline: 1px solid var(--link-color);
+        }
+    }
+
+    & > li > label{
+        display: block;
+        margin-top: -1rem;
+        padding-right: 10px;
+        padding-left: 10px;
+    }
+}
+
+
+
+/* Containers for all 3 "user forms" */
 .login,
-.register {
+.register,
+.logout {
     position: relative;
     /* Box */
     display: flex;
@@ -30,7 +66,7 @@
 
     border: solid 2px var(--edge-color);
     background-color: var(--main-color);
-    border-radius: 2rem;
+    border-radius: 1.5rem;
 
     /* Text alignment */
     max-width: fit-content;
@@ -53,7 +89,9 @@
 
 /* <small> was an inline element the entire time?!?! */
 .user-warning{
+    color: #f3d6ff;
     display: block;
+    margin-top: 5px;
 }
 
 
@@ -66,11 +104,15 @@
     color: var(--link-color);
     outline: none;
     border: 2px solid var(--edge-color);
-    border-radius: 2rem;
+    border-radius: 1rem;
     padding: 0.5rem;
 
+
     &:hover{
+        cursor: pointer;
         border-color: var(--link-color);
         color: var(--link-color);
+
     }
 }
+

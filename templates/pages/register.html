@@ -11,12 +11,13 @@
         {{ register_form.password(class="text-field") }}
         <div> Repeat the password </div>
         {{ register_form.password_repeat(class="text-field") }}
-        <input id="submit" type="submit" value="Register">
         {% if get_flashed_messages() %}
             {% for message in get_flashed_messages() %}
                 <small class="user-warning">{{message}}</small>
             {% endfor %}
         {% endif %}
+        <input id="submit" type="submit" value="Register">
+
     </h3>
 
 </form>

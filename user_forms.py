@@ -25,5 +25,5 @@ class RegisterForm(FlaskForm):
 
 class LogoutForm(FlaskForm):
     user_logout = RadioField('logout',
-                             choices=[(True, 'Yes'), (False, 'Return to homepage')],
+                             choices=[(True, 'Yes, log me out.'), (False, 'Return to homepage.')],
                              validators=[InputRequired("Please choose.")])

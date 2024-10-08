@@ -6,7 +6,7 @@ from datetime import datetime as dt
 from flask_wtf.csrf import CSRFProtect
 from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required
 from werkzeug.security import check_password_hash, generate_password_hash
-from user_forms import LoginForm, RegisterForm
+from user_forms import LoginForm, RegisterForm, LogoutForm
 
 
 # Flask Add-ons
@@ -123,6 +123,7 @@ def user_loader(user_id):
         return None
 
 
+# Handles some naughty users sneaking past unauthorized locations
 @login_manager.unauthorized_handler
 def kick_user():
     return redirect(url_for('login'))
@@ -131,7 +132,15 @@ def kick_user():
 @app.route("/logout", methods=['POST', 'GET'])
 @login_required
 def logout():
-    
+    logout_form = LogoutForm()
+    if logout_form.validate_on_submit():
+        if logout_form.user_logout.data == "True":
+            print(logout_form.user_logout.data)
+            logout_user()
+            return redirect(url_for('home'))
+        else:
+            return redirect(url_for('home'))
+    return render_template("pages/logout.html", logout_form=logout_form)
 
 
 # Routes
@@ -167,7 +176,7 @@ def register():
                             User=username).with_entities(
                                 DB_Users.User).first()
         print(existing_users)
-        if password_repeat == password:
+        if password_repeat == password and password_repeat != "":
             print(password)
             print(password_repeat)
             if existing_users:
@@ -283,17 +292,21 @@ def analytics(classroom_id):
 def staff():
     return (render_template("pages/staff.html"))
 
-
+@app.route("/about")
 def about():
     return (render_template("pages/about.html"))
 
 
 @app.route("/posts", methods=['POST'])
+@csrf.exempt
 def receiving_data():
     data = request.get_json()
     if data:
-        print(data)
-    return f"Signal received from sensor: {data['sensor']}, has value: {data['value']}", 200
+        print(f"Temperature is {data['temperature']}")
+        print(f"Humidity is {data['humidity']}")
+        print(f"Air Quality is {data['air_quality']}")
+        print(f"Loudnessis {data['loudness']}")
+    return f"Signal received from sensor!", 200
 
 
 # Universal error handler.
