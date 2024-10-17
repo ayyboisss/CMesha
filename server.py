@@ -184,7 +184,8 @@ def register():
         existing_users = DB_Users.query.filter_by(
                             User=username).with_entities(
                                 DB_Users.User).first()
-        if password_repeat == password and password_repeat != "":
+        # This check is probably redundant as WTForms already does the same thing
+        if not register_form.password.errors:
             print(password)
             print(password_repeat)
             if existing_users:
@@ -196,6 +197,7 @@ def register():
                 db.session.commit()
                 flash("Registered! Continue to the login page.")
         else:
+            print(register_form.password.errors)
             flash("The passwords do not match")
     return render_template('pages/register.html', register_form=register_form)
 

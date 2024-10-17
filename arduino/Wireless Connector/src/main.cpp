@@ -39,7 +39,7 @@ if (WiFi.status() == WL_CONNECTED){
   String jsonString;
   serializeJson(doc, jsonString);
 
-  http.begin("http://10.1.34.83:5000/posts");
+  http.begin("http://10.1.11.66:5000/posts");
   http.addHeader("Content-Type", "application/json");
   int httpResponseCode = http.POST(jsonString);
 

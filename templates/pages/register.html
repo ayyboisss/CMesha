@@ -16,6 +16,9 @@
                 <small class="user-warning">{{message}}</small>
             {% endfor %}
         {% endif %}
+        {% for error in register_form.password.errors %}
+            <small class="user-warning">{{ error }}</small>
+        {% endfor %}
         <input id="submit" type="submit" value="Register">
 
     </h3>
