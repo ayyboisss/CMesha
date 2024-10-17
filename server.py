@@ -16,6 +16,7 @@ csrf = CSRFProtect(app)
 
 
 class User(UserMixin):
+    "This is for creating the user so flask_login actually works"
     def __init__(self, id, username, password):
         self.id = str(id)
         self.username = username
@@ -38,6 +39,7 @@ class User(UserMixin):
 
 
 def get_classrooms():
+    "Get every ClassroomID in the Classroom table"
     class_list = []
     with app.app_context():
         result = Classroom.query.with_entities(Classroom.ClassroomID).all()
@@ -114,6 +116,8 @@ def kowalski_analyze(classroom_id=str):
 # This is for loading the user properly into the website
 @login_manager.user_loader
 def user_loader(user_id):
+    """For initializing the user so @login_required works.
+    This also verifies if the user exists in the database."""
     query_user = DB_Users.query.filter_by(
                     ID=user_id).with_entities(
                         DB_Users.ID, DB_Users.User, DB_Users.UserPassword).first()
@@ -123,15 +127,17 @@ def user_loader(user_id):
         return None
 
 
-# Handles some naughty users sneaking past unauthorized locations
 @login_manager.unauthorized_handler
 def kick_user():
+    """Returns the anonymous user to the login page when they access
+    any page that requires logging in. """
     return redirect(url_for('login'))
 
 
 @app.route("/logout", methods=['POST', 'GET'])
 @login_required
 def logout():
+    "Logout page, only available for logged in users."
     logout_form = LogoutForm()
     if logout_form.validate_on_submit():
         if logout_form.user_logout.data == "True":
@@ -146,6 +152,7 @@ def logout():
 # Routes
 @app.route("/login", methods=['POST', 'GET'])
 def login():
+    "Login page for anonymous users"
     login_form = LoginForm()
     if login_form.validate_on_submit():
         username = login_form.username.data
@@ -167,33 +174,34 @@ def login():
 
 @app.route("/register", methods=['POST', 'GET'])
 def register():
+    "Register page for anonymous users"
     register_form = RegisterForm()
     if register_form.validate_on_submit():
+        # Checks if the data provided doesn't already exist
         username = register_form.username.data
         password = register_form.password.data
         password_repeat = register_form.password_repeat.data
         existing_users = DB_Users.query.filter_by(
                             User=username).with_entities(
                                 DB_Users.User).first()
-        print(existing_users)
         if password_repeat == password and password_repeat != "":
             print(password)
             print(password_repeat)
             if existing_users:
                 flash("This username has already been taken")
             else:
-
-                flash("Inserting")
+                # Finally add the user to the database.
                 insert_query = DB_Users(User=username, UserPassword=generate_password_hash(password))
                 db.session.add(insert_query)
                 db.session.commit()
-                flash("Registered!")
+                flash("Registered! Continue to the login page.")
         else:
             flash("The passwords do not match")
     return render_template('pages/register.html', register_form=register_form)
 
 @app.route("/")
 def home():
+    """Home page, returns a list of all the latest classrooms that have the latest data in the """
     # This entire thing creates a list of all the data each classroom has.
     classrooms = Classroom.query.with_entities(
                     Classroom.ClassroomID).limit(6).all()
@@ -268,12 +276,14 @@ def home():
         datetime_convert = dt.strptime(str(result[0]), "%Y-%m-%d")
         temp_list.append(datetime_convert.strftime("%m/%d/%Y"))
 
+        # Finally, the big list is complete.
         complete_list.append(temp_list)
     return (render_template("pages/main.html", giga_list=complete_list))
 
 
 @app.route("/classroom/<string:classroom_id>")
 def analytics(classroom_id):
+    "Analytics page, these return data to be used by Google Charts API."
     if classroom_id not in get_classrooms():
         abort(404)
     data = kowalski_analyze(classroom_id)
@@ -288,18 +298,17 @@ def analytics(classroom_id):
                             ventilation=ventilation))
 
 
-@app.route("/staff")
-def staff():
-    return (render_template("pages/staff.html"))
-
 @app.route("/about")
 def about():
+    "Currently has nothing, should contain information as to what the website is about."
     return (render_template("pages/about.html"))
 
 
 @app.route("/posts", methods=['POST'])
 @csrf.exempt
 def receiving_data():
+    """This is for the measuring device as the website will receive the data from it.
+    Only accepts JSON file format. Returns a 200 if data has been successfully received."""
     data = request.get_json()
     if data:
         print(f"Temperature is {data['temperature']}")
@@ -312,7 +321,7 @@ def receiving_data():
 # Universal error handler.
 @app.errorhandler(HTTPException)
 def error(error_code):
-    print(error_code)
+    "Universal error handler"
     default_response = "Something went wrong!"
     default_code = 0
     # Gets the error code from the werkzeug HTTPException.
@@ -331,7 +340,7 @@ app.jinja_env.globals.update({
   'classrooms': get_classrooms()
 })
 
-
+# Runs the website.
 if "__main__" == __name__:
     # csrf.init_app(app)
     app.run(debug=True, host="0.0.0.0")
