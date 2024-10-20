@@ -1,5 +1,5 @@
 from database import app, Classroom, LoudnessData, TemperatureHumidityDatum, AnemometerDatum, db
-from database import Users as DB_Users # In hindsight, this could've been named something elsaaaa
+from database import Users as DB_Users # In hindsight, this could've been named something else
 from flask import render_template, abort, request, redirect, url_for, flash
 from werkzeug.exceptions import HTTPException
 from datetime import datetime as dt
@@ -176,6 +176,7 @@ def login():
 def register():
     "Register page for anonymous users"
     register_form = RegisterForm()
+    invalid_input = False
     if register_form.validate_on_submit():
         # Checks if the data provided doesn't already exist
         username = register_form.username.data
@@ -184,8 +185,20 @@ def register():
         existing_users = DB_Users.query.filter_by(
                             User=username).with_entities(
                                 DB_Users.User).first()
-        # This check is probably redundant as WTForms already does the same thing
-        if not register_form.password.errors:
+
+        # Whitespace check, just to avoid some goofy things
+        if username[0].isspace():
+            # I'm too lazy to implement a CSS way to wrap text
+            # without changing parent size. So, enjoy this wacky method.
+            message = """Provide a valid username without starting
+with a whitespace."""
+            invalid_input = True
+        if password[0].isspace():
+            message = """Provide a valid password without
+starting with a whitespace."""
+            invalid_input = True
+
+        if not register_form.password.errors and not invalid_input:
             print(password)
             print(password_repeat)
             if existing_users:
@@ -196,9 +209,12 @@ def register():
                 db.session.add(insert_query)
                 db.session.commit()
                 flash("Registered! Continue to the login page.")
-        else:
+        else: # This is part where we show errors
             print(register_form.password.errors)
-            flash("The passwords do not match")
+            if register_form.password.errors:
+                flash("The passwords do not match")
+            if invalid_input:
+                flash(message)
     return render_template('pages/register.html', register_form=register_form)
 
 @app.route("/")

@@ -69,8 +69,8 @@
     border-radius: 1.5rem;
 
     /* Text alignment */
-    max-width: fit-content;
-    margin: auto;
+    max-width: max-content;
+    margin: auto;   
     margin-top: 5%;
 
     &>h3 {
@@ -92,8 +92,8 @@
     color: #f3d6ff;
     display: block;
     margin-top: 5px;
+    white-space: pre-wrap;
 }
-
 
 #submit{
     display: block;
@@ -115,4 +115,3 @@
 
     }
 }
-
