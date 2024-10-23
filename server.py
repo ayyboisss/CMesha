@@ -25,10 +25,10 @@ class User(UserMixin):
     def is_active(self):
         return self.is_active()
 
-    def is_anonymous(self):
+    def is_anonymous():
         return False
 
-    def is_authenticated(self):
+    def is_authenticated():
         return True
 
     def get_id(self):
@@ -153,6 +153,8 @@ def logout():
 @app.route("/login", methods=['POST', 'GET'])
 def login():
     "Login page for anonymous users"
+    if User.is_authenticated() and not User.is_anonymous():
+        return redirect(url_for("home"))
     login_form = LoginForm()
     if login_form.validate_on_submit():
         username = login_form.username.data
@@ -175,6 +177,9 @@ def login():
 @app.route("/register", methods=['POST', 'GET'])
 def register():
     "Register page for anonymous users"
+    if User.is_authenticated() and not User.is_anonymous():
+        return redirect(url_for("home"))
+    
     register_form = RegisterForm()
     invalid_input = False
     if register_form.validate_on_submit():
