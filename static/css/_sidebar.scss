@@ -7,6 +7,7 @@
 
 .sidebar{
     border-left: solid var(--edge-color) 2px;
+    overflow-y: auto;
 }
 
 .classroom-list{

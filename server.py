@@ -4,7 +4,7 @@ from flask import render_template, abort, request, redirect, url_for, flash
 from werkzeug.exceptions import HTTPException
 from datetime import datetime as dt
 from flask_wtf.csrf import CSRFProtect
-from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required
+from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required, current_user, AnonymousUserMixin
 from werkzeug.security import check_password_hash, generate_password_hash
 from user_forms import LoginForm, RegisterForm, LogoutForm
 
@@ -31,11 +31,22 @@ class User(UserMixin):
     def is_authenticated():
         return True
 
+    def is_logged_in():
+        return True
+
     def get_id(self):
         return self.id
 
     def get_name(self):
         return self.username
+
+class Anonymous(AnonymousUserMixin):
+    "For people not logged in"
+    def __init__(self):
+        self.username = "Guest"
+
+    def is_logged_in():
+        return False
 
 
 def get_classrooms():
@@ -153,8 +164,9 @@ def logout():
 @app.route("/login", methods=['POST', 'GET'])
 def login():
     "Login page for anonymous users"
-    if User.is_authenticated() and not User.is_anonymous():
+    if current_user.is_logged_in():
         return redirect(url_for("home"))
+
     login_form = LoginForm()
     if login_form.validate_on_submit():
         username = login_form.username.data
@@ -177,7 +189,7 @@ def login():
 @app.route("/register", methods=['POST', 'GET'])
 def register():
     "Register page for anonymous users"
-    if User.is_authenticated() and not User.is_anonymous():
+    if  current_user.is_logged_in():
         return redirect(url_for("home"))
     
     register_form = RegisterForm()
