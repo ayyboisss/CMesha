@@ -364,6 +364,7 @@ nav ul #nav-seperator {
   flex-grow: 1;
 }
 nav ul #username {
+  white-space: nowrap;
   line-height: 3;
 }
 
