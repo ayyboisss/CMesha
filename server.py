@@ -4,7 +4,8 @@ from flask import render_template, abort, request, redirect, url_for, flash
 from werkzeug.exceptions import HTTPException
 from datetime import datetime as dt
 from flask_wtf.csrf import CSRFProtect
-from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required, current_user, AnonymousUserMixin
+from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required
+from flask_login import current_user as logged_in_user # Currently conflicts with some local variables
 from werkzeug.security import check_password_hash, generate_password_hash
 from user_forms import LoginForm, RegisterForm, LogoutForm
 
@@ -40,14 +41,6 @@ class User(UserMixin):
     def get_name(self):
         return self.username
 
-class Anonymous(AnonymousUserMixin):
-    "For people not logged in"
-    def __init__(self):
-        self.username = "Guest"
-
-    def is_logged_in():
-        return False
-
 
 def get_classrooms():
     "Get every ClassroomID in the Classroom table"
@@ -77,8 +70,13 @@ def tuple_to_list(content=tuple, convert_date=bool):
     return result
 
 
-def kowalski_analyze(classroom_id=str):
-    "Get all data relevent to the specific classroom"
+def classroom_data(classroom_id=str):
+    """
+    Get all data relevent to the specific classroom.
+    Returns a list with the order: 
+    (Loudness, LoudnessDate), (Temp, TempDate),
+    (Humidity, HumidityDate), (WindSpd, WindSpdDate).
+    """
     result = []
     result.append(classroom_id)
 
@@ -164,7 +162,7 @@ def logout():
 @app.route("/login", methods=['POST', 'GET'])
 def login():
     "Login page for anonymous users"
-    if current_user.is_logged_in():
+    if logged_in_user.is_active:
         return redirect(url_for("home"))
 
     login_form = LoginForm()
@@ -189,7 +187,7 @@ def login():
 @app.route("/register", methods=['POST', 'GET'])
 def register():
     "Register page for anonymous users"
-    if  current_user.is_logged_in():
+    if  logged_in_user.is_active:
         return redirect(url_for("home"))
     
     register_form = RegisterForm()
@@ -321,7 +319,7 @@ def analytics(classroom_id):
     "Analytics page, these return data to be used by Google Charts API."
     if classroom_id not in get_classrooms():
         abort(404)
-    data = kowalski_analyze(classroom_id)
+    data = classroom_data(classroom_id)
     loudness = data[1]
     temperature = data[2]
     humidity = data[3]
